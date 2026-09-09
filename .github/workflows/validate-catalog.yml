@@ -29,7 +29,7 @@ jobs:
           required_groups = {
               "ruleSearch": ("itemList", "itemName", "itemUrl"),
               "ruleChapter": ("chapterList", "chapterName", "chapterUrl"),
-              "ruleContent": ("imageList",),
+              "ruleContent": (),
           }
           for index, source in enumerate(sources):
               name = source.get("bookSourceName", f"#{index}")
@@ -54,5 +54,14 @@ jobs:
               image_host = source["ruleContent"].get("imageHost")
               if image_host:
                   assert image_host in source.get("allowedImageHosts", []), f"{name}: imageHost is not allowed"
+              content = source["ruleContent"]
+              numbered = content.get("numberedImages")
+              assert str(content.get("imageList", "")).strip() or isinstance(numbered, dict), f"{name}: missing image extraction rule"
+              if numbered:
+                  assert str(numbered.get("countVariable", "")).strip(), f"{name}: missing numbered image count variable"
+                  assert str(numbered.get("baseVariable", "")).strip(), f"{name}: missing numbered image base variable"
+                  assert numbered.get("firstIndex", 1) in (0, 1), f"{name}: numbered image firstIndex must be 0 or 1"
+                  extension = str(numbered.get("extension", ""))
+                  assert extension.startswith(".") and extension[1:].isalnum(), f"{name}: invalid numbered image extension"
 
           print(f"Validated {len(sources)} source(s)")

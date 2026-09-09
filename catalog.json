@@ -94,6 +94,48 @@
         "imageList": ".comic-contain amp-img.comic-contain__item@data-src",
         "imageHost": "s2.baozimh.com"
       }
+    },
+    {
+      "bookSourceName": "可漫画",
+      "bookSourceUrl": "https://www.dmanhua.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.dmanhua.com/",
+      "searchUrl": "https://www.dmanhua.com/search?query={{key}}&page={{page}}",
+      "popularUrl": "https://www.dmanhua.com/sort?category=0&tag=0&page={{page}}",
+      "latestUrl": "https://www.dmanhua.com",
+      "allowedImageHosts": [
+        "image1.dmanhua.com"
+      ],
+      "ruleSearch": {
+        "itemList": "a[href^=/comic/]:has(article.card)",
+        "itemName": ".cardtitle",
+        "itemUrl": "@href",
+        "itemCover": "img@data-src"
+      },
+      "ruleBookInfo": {
+        "name": ".info h1",
+        "cover": "img.cover@data-src",
+        "author": ".info .author:contains(作者)",
+        "genre": ".info .author:contains(标签)",
+        "status": ".info .status",
+        "description": ".description"
+      },
+      "ruleChapter": {
+        "chapterList": "a.chaper-btn[href^=/chapter/]",
+        "chapterName": "text()",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "numberedImages": {
+          "countVariable": "num",
+          "baseVariable": "pasd",
+          "firstIndex": 1,
+          "extension": ".webp"
+        }
+      }
     }
   ]
 }
