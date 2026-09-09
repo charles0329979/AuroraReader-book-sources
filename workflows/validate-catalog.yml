@@ -1,0 +1,58 @@
+name: Validate book-source catalog
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Validate catalog
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          catalog = json.loads(Path("catalog.json").read_text(encoding="utf-8-sig"))
+          assert catalog.get("schemaVersion") == 1, "schemaVersion must be 1"
+          sources = catalog.get("sources")
+          assert isinstance(sources, list) and sources, "sources must be a non-empty array"
+
+          identities = set()
+          required_groups = {
+              "ruleSearch": ("itemList", "itemName", "itemUrl"),
+              "ruleChapter": ("chapterList", "chapterName", "chapterUrl"),
+              "ruleContent": ("imageList",),
+          }
+          for index, source in enumerate(sources):
+              name = source.get("bookSourceName", f"#{index}")
+              identity = (name.strip().casefold(), source.get("bookSourceUrl"), source.get("bookSourceLang"))
+              assert identity not in identities, f"{name}: duplicate source identity"
+              identities.add(identity)
+              assert source.get("enable") is True, f"{name}: default source must be enabled"
+              assert str(source.get("bookSourceLang", "")).startswith("zh"), f"{name}: source must be Chinese"
+
+              for field in ("bookSourceUrl", "searchUrl", "popularUrl", "latestUrl", "detailsUrl", "chaptersUrl", "contentUrl"):
+                  value = source.get(field)
+                  if value:
+                      assert urlparse(value).scheme == "https", f"{name}: {field} must use HTTPS"
+              assert "{{key}}" in source.get("searchUrl", ""), f"{name}: searchUrl must use {{{{key}}}}"
+
+              for group, fields in required_groups.items():
+                  value = source.get(group)
+                  assert isinstance(value, dict), f"{name}: missing {group}"
+                  for field in fields:
+                      assert str(value.get(field, "")).strip(), f"{name}: missing {group}.{field}"
+
+              image_host = source["ruleContent"].get("imageHost")
+              if image_host:
+                  assert image_host in source.get("allowedImageHosts", []), f"{name}: imageHost is not allowed"
+
+          print(f"Validated {len(sources)} source(s)")

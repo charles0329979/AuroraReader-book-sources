@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-09T00:00:00+08:00",
+  "sources": [
+    {
+      "bookSourceName": "漫画1234",
+      "bookSourceUrl": "https://m.wmh1234.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://m.wmh1234.com/",
+      "searchUrl": "https://m.wmh1234.com/search/{{key}}/page/{{page}}",
+      "popularUrl": "https://m.wmh1234.com/category/order/hits/page/{{page}}",
+      "latestUrl": "https://m.wmh1234.com/category/order/addtime/page/{{page}}",
+      "contentUrl": "https://reader.hqread.cc/r/{{pathAfter:/go/}}",
+      "allowedHosts": [
+        "reader.hqread.cc"
+      ],
+      "allowedImageHosts": [
+        "wmh1234.wszwhg.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".comic-card",
+        "itemName": ".comic-card__title",
+        "itemUrl": "a.comic-card__link@href",
+        "itemCover": "img.comic-card__image@data-src",
+        "itemDescription": ".comic-card__chapter"
+      },
+      "ruleBookInfo": {
+        "name": "#mintWorkTitle",
+        "cover": "#mintWorkCover@src",
+        "author": ".mint-work-info p:nth-of-type(1)",
+        "genre": ".mint-work-info p:nth-of-type(2)",
+        "status": ".mint-tag",
+        "description": "#mintIntroPanel div"
+      },
+      "ruleChapter": {
+        "chapterList": ".mint-chapter-grid a",
+        "chapterName": "text()",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "imageList": "img.reader-image@data-src"
+      }
+    },
+    {
+      "bookSourceName": "包子漫画",
+      "bookSourceUrl": "https://cn.bzmgcn.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://cn.bzmgcn.com/",
+      "searchUrl": "https://cn.webmota.com/search?q={{key}}",
+      "popularUrl": "https://cn.bzmgcn.com/classify?page={{page}}",
+      "latestUrl": "https://cn.bzmgcn.com/list/new",
+      "contentUrl": "https://cn.bzmgcn.com/comic/chapter/{{query:comic_id}}/{{query:section_slot}}_{{query:chapter_slot}}.html",
+      "allowedHosts": [
+        "cn.cnbzmg.com",
+        "cn.webmota.com"
+      ],
+      "allowedImageHosts": [
+        "s2.baozimh.com",
+        "s1.bzcdn.net",
+        "s2.bzcdn.net",
+        "s3.bzcdn.net",
+        "s4.bzcdn.net",
+        "s5.bzcdn.net",
+        "s6.bzcdn.net",
+        "s7.bzcdn.net",
+        "s8.bzcdn.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".comics-card",
+        "itemName": ".comics-card__title",
+        "itemUrl": ".comics-card__poster@href",
+        "itemCover": ".comics-card__poster amp-img@src",
+        "itemAuthor": ".tags"
+      },
+      "ruleBookInfo": {
+        "name": "h1.comics-detail__title",
+        "cover": "meta[name='og:image']@content",
+        "author": "h2.comics-detail__author",
+        "description": "p.comics-detail__desc",
+        "genre": ".tag-list span.tag"
+      },
+      "ruleChapter": {
+        "chapterList": ".comics-chapters",
+        "chapterName": "text()",
+        "chapterUrl": "a@href"
+      },
+      "ruleContent": {
+        "imageList": ".comic-contain amp-img.comic-contain__item@data-src",
+        "imageHost": "s2.baozimh.com"
+      }
+    }
+  ]
+}
