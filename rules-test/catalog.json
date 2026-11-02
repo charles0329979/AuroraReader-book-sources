@@ -799,7 +799,7 @@
       "searchIntervalMs": 5000
     },
     {
-      "bookSourceName": "36漫画（仅首页目录检索）",
+      "bookSourceName": "36漫画（目录检索）",
       "bookSourceKey": "aurora.zh.manhua36",
       "bookSourceUrl": "https://m.36mh.org",
       "bookSourceType": 1,
@@ -808,7 +808,9 @@
       "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
       "searchUrl": "https://m.36mh.org/",
       "catalogSearchUrls": [
-        "https://m.36mh.org/"
+        "https://m.36mh.org/",
+        "https://m.36mh.org/custom/top",
+        "https://m.36mh.org/custom/update"
       ],
       "popularUrl": "https://m.36mh.org/custom/top",
       "latestUrl": "https://m.36mh.org/custom/update",
@@ -2324,5 +2326,5 @@
       }
     }
   ],
-  "revision": 1
+  "revision": 2
 }
