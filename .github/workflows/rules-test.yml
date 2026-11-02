@@ -1,0 +1,15 @@
+name: Validate rules-test catalog
+on:
+  push:
+    branches: [main]
+    paths: ['rules-test/**', '.github/workflows/rules-test.yml']
+  pull_request:
+    paths: ['rules-test/**', '.github/workflows/rules-test.yml']
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - run: python3 rules-test/validate.py
