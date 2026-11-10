@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "sources": [
+    {
+      "bookSourceName": "漫画1234",
+      "bookSourceKey": "aurora.zh.wmh1234",
+      "bookSourceUrl": "https://m.wmh1234.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://m.wmh1234.com/",
+      "searchUrl": "https://m.wmh1234.com/search?key={{key}}",
+      "healthCheckQuery": "三生三世十里桃花",
+      "popularUrl": "https://m.wmh1234.com/",
+      "contentUrl": "https://reader.hqread.cc/r/{{pathAfter:/go/}}",
+      "allowedImageHosts": [
+        "wmh1234.wszwhg.net"
+      ],
+      "ruleSearch": {
+        "itemList": "body:has(#searchInput) section.container > .comic-grid > article.comic-card, body:not(:has(#searchInput)) article.comic-card",
+        "itemName": "h3.comic-card__title",
+        "itemUrl": "a.comic-card__link@href",
+        "itemCover": "img.comic-card__image@data-src"
+      },
+      "ruleBookInfo": {
+        "name": "#mintWorkTitle",
+        "cover": "#mintWorkCover@src",
+        "author": ".mint-work-info p:first-of-type",
+        "status": ".mint-work-info .mint-tag",
+        "description": "meta[property='og:description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": ".mint-chapter-grid a[href^='/go/'], .mint-chapter-grid a[href^='/comic/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "main[data-mint-reader] img.reader-image[data-src]@data-src"
+      }
+    },
+    {
+      "bookSourceName": "LINE WEBTOON（繁體中文）",
+      "bookSourceKey": "aurora.zh.webtoons.zh-hant",
+      "bookSourceUrl": "https://www.webtoons.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hant",
+      "httpUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/139.0 Safari/537.36",
+      "header": "Referer:https://www.webtoons.com/",
+      "searchUrl": "https://www.webtoons.com/zh-hant/search?keyword={{key}}",
+      "popularUrl": "https://www.webtoons.com/zh-hant/ranking/trending",
+      "chaptersUrl": "https://m.webtoons.com/api/v1/webtoon/{{query:title_no}}/episodes?pageSize=99999",
+      "allowedImageHosts": [
+        "webtoon-phinf.pstatic.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".webtoon_list li a[href*='/list?title_no=']",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author_area",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "$.result.episodeList",
+        "chapterName": "$.episodeTitle",
+        "chapterUrl": "$.viewerLink"
+      },
+      "ruleContent": {
+        "imageList": "#_imageList > img[data-url]@data-url"
+      },
+      "healthCheckQuery": "閻羅降臨"
+    },
+    {
+      "bookSourceName": "咚漫漫画（网页）",
+      "bookSourceKey": "aurora.zh.dongmanmanhua.web",
+      "maxDocumentBytes": 8000000,
+      "bookSourceUrl": "https://www.dongmanmanhua.cn",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.dongmanmanhua.cn/",
+      "searchUrl": "https://www.dongmanmanhua.cn/search?keyword={{key}}&page={{page}}",
+      "popularUrl": "https://www.dongmanmanhua.cn/dailySchedule",
+      "latestUrl": "https://www.dongmanmanhua.cn/dailySchedule?sortOrder=UPDATE&webtoonCompleteType=ONGOING",
+      "allowedImageHosts": [
+        "cdn.dongmanmanhua.cn"
+      ],
+      "ruleSearch": {
+        "itemList": "#content .card_wrap.search ul.card_lst li a[href^='/episodeList?']",
+        "itemName": "p.subj",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "ul#_listUl li > a[href*='/viewer?']",
+        "chapterName": "span.subj span",
+        "chapterUrl": "@href",
+        "reverse": true,
+        "nextPageSelector": "div.paginate a[onclick] + a[href]",
+        "maxIndexPages": 200
+      },
+      "ruleContent": {
+        "imageList": "#_imageList img[data-url]@data-url"
+      },
+      "healthCheckQuery": "非人哉"
+    }
+  ]
+}
