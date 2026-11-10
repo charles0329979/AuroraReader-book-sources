@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": 2,
+  "revision": 3,
   "sources": [
     {
       "bookSourceName": "漫画1234",
@@ -114,7 +114,8 @@
         "chapterUrl": "@href",
         "reverse": true,
         "nextPageSelector": "div.paginate a[onclick] + a[href]",
-        "maxIndexPages": 200
+        "maxIndexPages": 200,
+        "indexPageLinks": "div.paginate a[href]"
       },
       "ruleContent": {
         "imageList": "#_imageList img[data-url]@data-url"
