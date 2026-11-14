@@ -1,11 +1,29 @@
-# iOS experimental rules channel
+# iOS 规则订阅与可信发布
 
-Stable URL: https://raw.githubusercontent.com/charles0329979/AuroraReader-book-sources/main/ios-rules/catalog.json
+固定用户地址：
+https://raw.githubusercontent.com/charles0329979/AuroraReader-book-sources/main/ios-rules/catalog.json
 
-For the iOS prototype on `ios/reading-loop-cloud` only. Revision must increase on every catalog change. Keep source IDs stable. This is an experimental channel, not an assertion of App Store authorization or full health of every source.
+2026-11-14：revision 4 收录 Android 规则测试目录中的全部 56 条规则，保留来源 ID；这是迁移清单，不等于 56 条均已健康验收。适用于 `ios/reading-loop-cloud` 的第 2 代规则引擎。旧的三书源 iOS 原型需先更新一次应用；Android 正式版及其发布通道没有修改。
 
-The client validates the whole catalog before committing, retains last valid rules on errors, and provides a previous-version restore action. Same-revision modifications and silent revision downgrades are rejected. Refresh runs manually or when opening the source screen after 24 hours; it is not an iOS background scheduling guarantee.
+## 客户端处理
 
-Initial capability batch: 漫画1234, LINE WEBTOON 繁體中文, 咚漫漫画. Client capabilities and reviewed hosts are compiled into the app; adding unsupported capabilities requires an app update. Changes to selectors within supported capabilities can arrive through this URL.
+用户继续添加上述 URL，新引擎会读取同目录 `catalog.signed.json`，先验证应用内固定的 Ed25519 公钥，再检查目录版本、所需引擎能力、来源 ID、审核域名与资源限制。更新采用完整快照；失败保留现有规则和下载。支持显式恢复上一版，恢复后仍保留最高签名版本记录，防止网络重放更旧的版本。
 
-Trust: HTTPS with a restricted catalog host, engine capability/host validation and locally stored SHA-256. This is not publisher signature verification. Signing and key rotation remain release preparation work.
+签名原文为 UTF-8 `AuroraReader.rules.v1\0`（末尾为一个 NUL 字节）加原始 `catalog.json` 字节。签名封装格式版本为 1，算法 Ed25519，payload 为 Base64；SHA-256 只作缓存完整性检查，不代替发布者签名。当前固定密钥 ID 为 `aurora-ios-20261114-1`。远程最低目录版本为 3，测试用更早签名样本不能从网络导入。
+
+全部来源在用户界面保留；不支持的来源显示具体兼容原因，不静默删除。相同站点的语言变体合并展示，底层 ID 保持独立。成功订阅后可手动更新，打开书源页且距上次成功检查超过 24 小时自动检查；不保证 iOS 后台定时运行。
+
+## 开发者日常更新
+
+1. 编辑 `catalog.json`，保留既有 `bookSourceKey`，每次内容变更增加 `revision`。
+2. 在测试分支验证目标来源的搜索、详情、目录、整章图片和本地续读；分别记录能力支持与现场健康结果。
+3. 推送 main。`Sign iOS rule catalog` 工作流使用 Actions Secret `IOS_RULE_SIGNING_PRIVATE_KEY` 签名并提交 `catalog.signed.json`。
+4. 检查签名工作流成功，再执行 `node ios-rules/sign.mjs --verify`；用户下次检查订阅即可收到兼容的修复。
+
+签名封装是独立发布单元。原始目录先发布、签名任务尚未完成时，用户继续读取上一次完整签名目录，不读取半成品。
+
+## 兼容边界和密钥管理
+
+应用不下载 APK、不执行远程 JavaScript。选择器、模板、已有原生解码器支持的数据变化可走仓库；新增解码算法、未审核来源/域名、格式升级需要先发布支持它们的应用。HTTP、无效 TLS、登录或付费限制不能通过关闭检查来解决。签名不构成内容授权或商店审核保证。
+
+私钥不得提交仓库或写入日志；公钥保存在 `public-keys.json` 并固定于应用。轮换时先发布同时信任新旧公钥的应用，再切换签名密钥和 keyId；不能只修改仓库公钥文件就让旧应用信任新密钥。应将私钥另存于受控离线备份；泄露后需要撤销并发布更新应用。当前尚未实现无需应用更新的密钥撤销服务。
