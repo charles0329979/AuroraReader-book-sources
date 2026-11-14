@@ -1,45 +1,166 @@
 {
   "schemaVersion": 1,
-  "revision": 3,
+  "revision": 4,
+  "minimumEngineVersion": 2,
+  "requiredCapabilities": [
+    "catalog.inventory.v1",
+    "catalog.signatures.v1"
+  ],
   "sources": [
     {
-      "bookSourceName": "漫画1234",
-      "bookSourceKey": "aurora.zh.wmh1234",
-      "bookSourceUrl": "https://m.wmh1234.com",
+      "bookSourceName": "包子漫画",
+      "bookSourceUrl": "https://cn.bzmgcn.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://cn.webmota.com/",
+      "searchUrl": "https://cn.webmota.com/search?q={{key}}",
+      "popularUrl": "https://cn.webmota.com/classify?page={{page}}",
+      "latestUrl": "https://cn.webmota.com/list/new",
+      "detailsUrl": "https://cn.webmota.com/comic/{{pathAfter:/comic/}}",
+      "chaptersUrl": "https://cn.webmota.com/comic/{{pathAfter:/comic/}}",
+      "contentUrl": "https://cn.webmota.com/comic/chapter/{{query:comic_id}}/{{query:section_slot}}_{{query:chapter_slot}}.html",
+      "healthCheckQuery": "妖神记",
+      "allowedHosts": [
+        "cn.cnbzmg.com",
+        "cn.webmota.com"
+      ],
+      "allowedImageHosts": [
+        "static-tw.baozimh.com",
+        "s2.baozimh.com",
+        "s1.bzcdn.net",
+        "s2.bzcdn.net",
+        "s3.bzcdn.net",
+        "s4.bzcdn.net",
+        "s5.bzcdn.net",
+        "s6.bzcdn.net",
+        "s7.bzcdn.net",
+        "s8.bzcdn.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".comics-card",
+        "itemName": ".comics-card__title",
+        "itemUrl": ".comics-card__poster@href",
+        "itemCover": ".comics-card__poster amp-img@src",
+        "itemAuthor": ".tags"
+      },
+      "ruleBookInfo": {
+        "name": "h1.comics-detail__title",
+        "cover": "meta[name='og:image']@content",
+        "author": "h2.comics-detail__author",
+        "description": "p.comics-detail__desc",
+        "genre": ".tag-list span.tag"
+      },
+      "ruleChapter": {
+        "chapterList": "#chapter-items .comics-chapters, #chapters_other_list .comics-chapters",
+        "chapterName": "text()",
+        "chapterUrl": "a@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": ".comic-contain amp-img.comic-contain__item@data-src",
+        "htmlPageProfile": "baozi-amp-v1"
+      },
+      "bookSourceKey": "736f6ec664a5b3c95f78bb03"
+    },
+    {
+      "bookSourceName": "可漫画",
+      "bookSourceUrl": "https://www.dmanhua.com",
       "bookSourceType": 1,
       "enable": true,
       "bookSourceLang": "zh-Hans",
       "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
-      "header": "Referer:https://m.wmh1234.com/",
-      "searchUrl": "https://m.wmh1234.com/search?key={{key}}",
-      "healthCheckQuery": "三生三世十里桃花",
-      "popularUrl": "https://m.wmh1234.com/",
-      "contentUrl": "https://reader.hqread.cc/r/{{pathAfter:/go/}}",
+      "header": "Referer:https://www.dmanhua.com/",
+      "searchUrl": "https://www.dmanhua.com/search?query={{key}}&page={{page}}",
+      "popularUrl": "https://www.dmanhua.com/sort?category=0&tag=0&page={{page}}",
+      "latestUrl": "https://www.dmanhua.com",
       "allowedImageHosts": [
-        "wmh1234.wszwhg.net"
+        "image1.dmanhua.com"
       ],
       "ruleSearch": {
-        "itemList": "body:has(#searchInput) section.container > .comic-grid > article.comic-card, body:not(:has(#searchInput)) article.comic-card",
-        "itemName": "h3.comic-card__title",
-        "itemUrl": "a.comic-card__link@href",
-        "itemCover": "img.comic-card__image@data-src"
+        "itemList": "a[href^=/comic/]:has(article.card)",
+        "itemName": ".cardtitle",
+        "itemUrl": "@href",
+        "itemCover": "img@data-src"
       },
       "ruleBookInfo": {
-        "name": "#mintWorkTitle, .mint-work-info h1",
-        "cover": "#mintWorkCover@src",
-        "author": ".mint-work-info p:first-of-type",
-        "status": ".mint-work-info .mint-tag",
-        "description": "meta[property='og:description']@content"
+        "name": ".info h1",
+        "cover": "img.cover@data-src",
+        "author": ".info .author:contains(作者)",
+        "genre": ".info .author:contains(标签)",
+        "status": ".info .status",
+        "description": ".description"
       },
       "ruleChapter": {
-        "chapterList": ".mint-chapter-grid a[href^='/go/'], .mint-chapter-grid a[href^='/comic/']",
+        "chapterList": "a.chaper-btn[href^=/chapter/]",
         "chapterName": "text()",
-        "chapterUrl": "@href",
-        "reverse": true
+        "chapterUrl": "@href"
       },
       "ruleContent": {
-        "imageList": "main[data-mint-reader] img.reader-image[data-src]@data-src"
-      }
+        "numberedImages": {
+          "countVariable": "num",
+          "baseVariable": "pasd",
+          "firstIndex": 1,
+          "extension": ".webp"
+        }
+      },
+      "bookSourceKey": "b855d78b0004039640b0b21c"
+    },
+    {
+      "bookSourceName": "漫画456（仅排行更新目录检索）",
+      "bookSourceUrl": "https://m.manhua456.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://m.manhua456.com/",
+      "searchUrl": "https://m.manhua456.com/rank/",
+      "popularUrl": "https://m.manhua456.com/rank/",
+      "latestUrl": "https://m.manhua456.com/update/",
+      "detailsUrl": "https://m.manhua456.com/{{pathAfter:/}}",
+      "chaptersUrl": "https://m.manhua456.com/{{pathAfter:/}}",
+      "allowedImageHosts": [
+        "mhpicwwt.tgmhfc.uk",
+        "res.tgmhfc.uk",
+        "res456.tgmhfc.uk"
+      ],
+      "ruleSearch": {
+        "itemList": ".itemBox",
+        "itemName": ".itemTxt a.title",
+        "itemUrl": ".itemTxt a.title@href",
+        "itemCover": ".itemImg img@src",
+        "itemAuthor": ".itemTxt .txtItme:nth-of-type(1)",
+        "itemDescription": ".itemTxt .txtItme:nth-of-type(2)"
+      },
+      "ruleBookInfo": {
+        "name": "#comicName",
+        "cover": "#Cover img@src",
+        "author": ".sub_r .txtItme:nth-of-type(1)",
+        "genre": ".sub_r .txtItme:nth-of-type(2)",
+        "status": ".sub_r .txtItme:nth-of-type(3)",
+        "description": "meta[name='description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": ".chapter-warp .Drama a[href$='.html']",
+        "chapterName": "text()",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "scriptArray": {
+          "variable": "chapterImages",
+          "relativeBaseUrl": "https://res.tgmhfc.uk/",
+          "pathVariable": "chapterPath"
+        }
+      },
+      "catalogSearchUrls": [
+        "https://m.manhua456.com/rank/",
+        "https://m.manhua456.com/update/"
+      ],
+      "healthCheckQuery": "憧憬成为魔法少女",
+      "contentUrl": "https://m.manhua456.com/{{pathAfter:/}}",
+      "upgradeMediaToHttps": true,
+      "bookSourceKey": "48fd547fffa7d12b84f9075e"
     },
     {
       "bookSourceName": "LINE WEBTOON（繁體中文）",
@@ -121,6 +242,2097 @@
         "imageList": "#_imageList img[data-url]@data-url"
       },
       "healthCheckQuery": "非人哉"
+    },
+    {
+      "bookSourceName": "250漫画",
+      "bookSourceKey": "aurora.zh.mh250",
+      "bookSourceUrl": "https://www.mh250.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.mh250.com/",
+      "searchUrl": "https://www.mh250.com{{searchPath}}?searchkey={{key}}",
+      "searchPathVariable": "msearchurl",
+      "searchPathSelector": "a.search[href]",
+      "popularUrl": "https://www.mh250.com/",
+      "latestUrl": "https://www.mh250.com/update",
+      "allowedImageHosts": [
+        "res2.tupian.run",
+        "bz23.tupian.run"
+      ],
+      "ruleSearch": {
+        "itemList": "a[href^='/book/']:has(img[alt])",
+        "itemName": "img@alt",
+        "itemUrl": "@href",
+        "itemCover": "img@data-src"
+      },
+      "ruleBookInfo": {
+        "name": "meta[property='og:title']@content",
+        "cover": "meta[property='og:image']@content",
+        "author": "meta[property='og:novel:author']@content",
+        "genre": "meta[property='og:novel:category']@content",
+        "status": "meta[property='og:novel:status']@content",
+        "description": "meta[property='og:description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": "#ncp3_ul a[href$='.html'], #detail-list-select-1 a[href$='.html']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": ".comicpage .imgpic img[data-original]@data-original"
+      }
+    },
+    {
+      "bookSourceName": "图库漫画",
+      "bookSourceKey": "aurora.zh.tuku",
+      "bookSourceUrl": "https://www.tuku.cc",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://www.tuku.cc/",
+      "searchUrl": "https://www.tuku.cc/search?title={{key}}&page={{page}}",
+      "popularUrl": "https://www.tuku.cc/rank/",
+      "latestUrl": "https://www.tuku.cc/comics/",
+      "allowedNumberedImageHosts": [
+        "image{n}.tuku.cc"
+      ],
+      "ruleSearch": {
+        "itemList": "a[href^='/manga-'][title]:has(img)",
+        "itemName": "@title",
+        "itemUrl": "@href",
+        "itemCover": "img@src",
+        "filterTitle": true
+      },
+      "ruleBookInfo": {
+        "name": ".info-card .info-text .title, .manga-info-card h1",
+        "cover": ".info-card .info-bg img, .manga-info-card .manga-cover img@src",
+        "author": ".info-card .info-text .author a, .manga-info-card .manga-info-wrap p a",
+        "genre": ".info-card .tag-item, .manga-info-card .manga-info-wrap h2 a",
+        "description": ".manga-desc, .manga-info-card .manga-info-wrap p.multi-ellipsis"
+      },
+      "ruleChapter": {
+        "chapterList": "a.chapter-item[href^='/chapter'], a.manga-chapter-item[href^='/chapter']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "img.no-drag[data-original]@data-original"
+      }
+    },
+    {
+      "bookSourceName": "BikaBika漫画",
+      "bookSourceKey": "aurora.zh.bikabika",
+      "bookSourceUrl": "https://m.bikamanhua.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://m.bikamanhua.com/",
+      "searchUrl": "https://m.bikamanhua.com/search?key={{key}}",
+      "popularUrl": "https://m.bikamanhua.com/category/order/hits/page/{{page}}",
+      "latestUrl": "https://m.bikamanhua.com/category/order/addtime/page/{{page}}",
+      "allowedImageHosts": [
+        "s2.bzcdn.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".item > a.main:has(img), .books-row .item > a[href]:has(img)",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".book-hero h1.title",
+        "cover": ".book-hero img.bg@src",
+        "author": ".book-container__author",
+        "genre": ".book-hero .tags",
+        "description": ".book-container__detail"
+      },
+      "ruleChapter": {
+        "chapterList": ".episode-list .desc_item > a[href$='.html']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "img.lazy-read[data-original]@data-original"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "360漫画",
+      "bookSourceKey": "aurora.zh.manhua360",
+      "bookSourceUrl": "https://www.360mh.cc",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.360mh.cc/",
+      "searchUrl": "https://www.360mh.cc/index.php/search?key={{key}}",
+      "popularUrl": "https://www.360mh.cc/index.php/category/order/hits/page/{{page}}",
+      "latestUrl": "https://www.360mh.cc/index.php/category/order/addtime/page/{{page}}",
+      "allowedImageHosts": [
+        "s1.baozimh.com",
+        "s2.baozimh.com"
+      ],
+      "ruleSearch": {
+        "itemList": ".common-comic-item, li.comic-item, .comic-list-item",
+        "itemName": "a.cover img@alt",
+        "itemUrl": "a.cover@href",
+        "itemCover": "a.cover img@data-original"
+      },
+      "ruleBookInfo": {
+        "name": ".j-comic-title, h1.comic-name",
+        "author": ".comic-author .name",
+        "genre": ".comic-tags",
+        "description": ".comic-intro .intro-total, .detail-intro .comic-intro"
+      },
+      "ruleChapter": {
+        "chapterList": ".catalog-list li.chapter-item a[href^='/index.php/chapter/'], .chapter__list a.j-chapter-link[href^='/index.php/chapter/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "li.comic-page img[src^='http']@src"
+      }
+    },
+    {
+      "bookSourceName": "zero搬运网",
+      "bookSourceKey": "aurora.zh.zerobyw",
+      "bookSourceUrl": "https://www.zerobyw33.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0",
+      "header": "Referer:https://www.zerobyw33.com/",
+      "searchUrl": "https://www.zerobyw33.com/pc/pc/?keyword={{key}}&page={{page}}",
+      "popularUrl": "https://www.zerobyw33.com/pc/pc/?page={{page}}",
+      "allowedImageHosts": [
+        "tupa.zerobyw33.com"
+      ],
+      "ruleSearch": {
+        "itemList": "a[href*='/details/?kuid=']:has(h3)",
+        "itemName": "h3",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": "main h1",
+        "cover": "main img.object-contain@src",
+        "description": "p[x-ref='summaryText']"
+      },
+      "ruleChapter": {
+        "chapterList": "div.grid a[href*='/view/index.php?zjid=']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "#image-container img.manga-image@src"
+      }
+    },
+    {
+      "bookSourceName": "ant搬运网",
+      "bookSourceKey": "aurora.zh.antbyw",
+      "bookSourceUrl": "https://www.antbyw.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0",
+      "header": "Referer:https://www.antbyw.com/",
+      "searchUrl": "https://www.antbyw.com/plugin.php?id=jameson_manhua&c=index&a=search&keyword={{key}}",
+      "healthCheckQuery": "世界计划四格漫画",
+      "popularUrl": "https://www.antbyw.com/plugin.php?id=jameson_manhua&c=index&a=ku",
+      "allowedImageHosts": [
+        "imgmh3.antbyw.com"
+      ],
+      "ruleSearch": {
+        "itemList": "div.uk-card:has(.uk-card-media-top a[href*='a=bofang'])",
+        "itemName": "p.mt5.mb5 a",
+        "itemUrl": ".uk-card-media-top a@href",
+        "itemCover": ".uk-card-media-top img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".bofangwrap h3.uk-heading-line",
+        "cover": ".bofangwrap img@src",
+        "description": "meta[name='description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": "a.zj-container[href*='zjid=']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "scriptArray": {
+          "variable": "urls"
+        }
+      }
+    },
+    {
+      "bookSourceName": "漫画1234",
+      "bookSourceKey": "aurora.zh.wmh1234",
+      "bookSourceUrl": "https://m.wmh1234.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://m.wmh1234.com/",
+      "searchUrl": "https://m.wmh1234.com/search?key={{key}}",
+      "healthCheckQuery": "三生三世十里桃花",
+      "popularUrl": "https://m.wmh1234.com/",
+      "contentUrl": "https://reader.hqread.cc/r/{{pathAfter:/go/}}",
+      "allowedImageHosts": [
+        "wmh1234.wszwhg.net"
+      ],
+      "ruleSearch": {
+        "itemList": "body:has(#searchInput) section.container > .comic-grid > article.comic-card, body:not(:has(#searchInput)) article.comic-card",
+        "itemName": "h3.comic-card__title",
+        "itemUrl": "a.comic-card__link@href",
+        "itemCover": "img.comic-card__image@data-src"
+      },
+      "ruleBookInfo": {
+        "name": "#mintWorkTitle, .mint-work-info h1",
+        "cover": "#mintWorkCover@src",
+        "author": ".mint-work-info p:first-of-type",
+        "status": ".mint-work-info .mint-tag",
+        "description": "meta[property='og:description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": ".mint-chapter-grid a[href^='/go/'], .mint-chapter-grid a[href^='/comic/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "main[data-mint-reader] img.reader-image[data-src]@data-src"
+      }
+    },
+    {
+      "bookSourceName": "动漫啦",
+      "bookSourceKey": "aurora.zh.dongmanla",
+      "bookSourceUrl": "https://www.dongman.la",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.dongman.la/",
+      "searchUrl": "https://www.dongman.la/manhua/search/?key={{key}}",
+      "healthCheckQuery": "筋肉人二世究极双打篇",
+      "popularUrl": "https://www.dongman.la/manhua/serial/{{page}}.html",
+      "contentUrl": "https://www.dongman.la/manhua/chapter/{{pathAfter:/manhua/chapter/}}all.html",
+      "allowedImageHosts": [
+        "img.dongman.la"
+      ],
+      "ruleSearch": {
+        "itemList": "ul.divide-y.divide-gray-100 > li:has(a.flex-shrink-0[href^='/manhua/detail/'])",
+        "itemName": "h2 a",
+        "itemUrl": "a.flex-shrink-0@href",
+        "itemCover": "img[data-cover]@src"
+      },
+      "ruleBookInfo": {
+        "name": "h1[itemprop='name']",
+        "cover": ".detail-cover img@src",
+        "author": ".detail-meta",
+        "description": ".detail-description p"
+      },
+      "ruleChapter": {
+        "chapterList": "#chapterList a[href^='/manhua/chapter/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "img.lazy-image.reader-img[data-src]@data-src"
+      }
+    },
+    {
+      "bookSourceName": "看漫画（免费章节）",
+      "bookSourceKey": "aurora.zh.kanman.free",
+      "bookSourceUrl": "https://m.kanman.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://m.kanman.com/",
+      "searchUrl": "https://comic.321mh.com/app_api/v5/getsortlist/?page={{page}}&size=30&orderby=click&search_type=&comic_sort=&search_key={{key}}&platformname=android&productname=kmh",
+      "popularUrl": "https://comic.321mh.com/app_api/v5/getsortlist/?page={{page}}&size=30&orderby=click&search_type=&comic_sort=&search_key=&platformname=android&productname=kmh",
+      "latestUrl": "https://comic.321mh.com/app_api/v5/getsortlist/?page={{page}}&size=30&orderby=date&search_type=&comic_sort=&search_key=&platformname=android&productname=kmh",
+      "detailsUrl": "https://comic.321mh.com/app_api/v5/getcomicinfo_body/?comic_id={{pathAfter:/comic/}}&platformname=android&productname=kmh",
+      "chaptersUrl": "https://comic.321mh.com/app_api/v5/getcomicinfo_body/?comic_id={{pathAfter:/comic/}}&platformname=android&productname=kmh",
+      "contentUrl": "https://m.kanman.com/api/getchapterinfov2?product_id=1&productname=kmh&platformname=wap&comic_id={{query:comic_id}}&chapter_newid={{query:chapter_newid}}&isWebp=1&quality=low",
+      "allowedImageHosts": [
+        "hw-chapter2.kaimanhua.com",
+        "image.yqmh.com"
+      ],
+      "ruleSearch": {
+        "itemList": "$.data",
+        "itemName": "$.comic_name",
+        "itemUrl": "'/comic/' + $.comic_id",
+        "itemCover": "'https://image.yqmh.com/mh/' + $.comic_id + '.jpg-300x400.webp'",
+        "itemAuthor": "$.comic_author"
+      },
+      "ruleBookInfo": {
+        "name": "$.comic_name",
+        "author": "$.comic_author",
+        "description": "$.comic_desc",
+        "status": "$.update_status_str"
+      },
+      "ruleChapter": {
+        "chapterList": "$.comic_chapter",
+        "chapterName": "$.chapter_name",
+        "chapterUrl": "$.chapter_id",
+        "chapterUrlTemplate": "https://m.kanman.com/reader?comic_id={{mangaId}}&chapter_newid={{chapterId}}",
+        "freeWhenZero": [
+          "$.price",
+          "$.islock"
+        ],
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "$.data.current_chapter.chapter_img_list"
+      }
+    },
+    {
+      "bookSourceName": "思思漫画",
+      "bookSourceKey": "aurora.zh.sisimanhua",
+      "bookSourceUrl": "https://m.sisimanhua.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/124.0 Mobile Safari/537.36",
+      "header": "Referer:https://m.sisimanhua.com/",
+      "searchUrl": "https://m.sisimanhua.com/statics/search.aspx?key={{key}}",
+      "popularUrl": "https://m.sisimanhua.com/",
+      "allowedImageHosts": [
+        "f2-img.534zm.com",
+        "s1.baozimh.com",
+        "s2.baozimh.com",
+        "pic.wulawei.com"
+      ],
+      "upgradeMediaToHttps": true,
+      "ruleSearch": {
+        "itemList": "li:has(a.ImgA[href^='/manhua/'])",
+        "itemName": "a.txtA",
+        "itemUrl": "a.ImgA@href",
+        "itemCover": "a.ImgA img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".Introduct_Sub h1.title",
+        "cover": ".Introduct_Sub .pic img@src",
+        "author": ".Introduct_Sub .sub_r p.txtItme:nth-of-type(2)",
+        "genre": ".Introduct_Sub .sub_r p.txtItme:nth-of-type(3)",
+        "description": "p.txtDesc"
+      },
+      "ruleChapter": {
+        "chapterList": "#mh-chapter-list-ol-0 a[href^='/manhua/']",
+        "chapterName": "span",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "base64ImageList": {
+          "variable": "qTcms_S_m_murl_e",
+          "separator": "$qingtiandy$"
+        }
+      }
+    },
+    {
+      "bookSourceName": "泰拉记事社",
+      "bookSourceKey": "aurora.zh.terrahistoricus",
+      "bookSourceUrl": "https://comic.hypergryph.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://comic.hypergryph.com/",
+      "searchUrl": "https://comic.hypergryph.com/api/comic?topicKey=terra-historicus",
+      "catalogSearchUrls": [
+        "https://comic.hypergryph.com/api/comic?topicKey=terra-historicus",
+        "https://comic.hypergryph.com/api/comic?topicKey=talos-ii-historicus"
+      ],
+      "popularUrl": "https://comic.hypergryph.com/api/comic?topicKey=terra-historicus",
+      "detailsUrl": "https://comic.hypergryph.com/api/comic/{{pathAfter:/comic/}}",
+      "chaptersUrl": "https://comic.hypergryph.com/api/comic/{{pathAfter:/comic/}}",
+      "contentUrl": "https://comic.hypergryph.com/api/comic/{{pathAfter:/comic/}}",
+      "allowedImageHosts": [
+        "res01.hycdn.cn",
+        "web.hycdn.cn"
+      ],
+      "ruleSearch": {
+        "itemList": "$.data",
+        "itemName": "$.title",
+        "itemUrl": "'/api/comic/' + $.cid",
+        "itemCover": "$.cover"
+      },
+      "ruleBookInfo": {
+        "name": "$.data.title",
+        "cover": "$.data.cover",
+        "description": "$.data.introduction"
+      },
+      "ruleChapter": {
+        "chapterList": "$.data.episodes",
+        "chapterName": "$.title",
+        "chapterUrl": "$.cid",
+        "chapterUrlTemplate": "https://comic.hypergryph.com/api/comic/{{mangaId}}/episode/{{chapterId}}"
+      },
+      "ruleContent": {
+        "pageApi": {
+          "pageList": "$.data.pageInfos",
+          "pageUrlTemplate": "https://comic.hypergryph.com/api/comic/{{pathAfter:/comic/}}/page?pageNum={{page}}",
+          "imageUrl": "$.data.url"
+        }
+      }
+    },
+    {
+      "bookSourceName": "沐沐漫画",
+      "bookSourceKey": "aurora.zh.talkmanhua",
+      "bookSourceUrl": "https://www.talkmanhua.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://www.talkmanhua.com/",
+      "searchUrl": "https://www.talkmanhua.com/search",
+      "searchForm": {
+        "field": "title"
+      },
+      "healthCheckQuery": "与龙行",
+      "popularUrl": "https://www.talkmanhua.com/all?sectionId=3&page=1&size=30",
+      "detailsUrl": "https://www.talkmanhua.com/detail/{{pathAfter:/detail/}}",
+      "chaptersUrl": "https://www.talkmanhua.com/detail/{{pathAfter:/detail/}}",
+      "contentUrl": "https://www.talkmanhua.com/contents/{{pathAfter:/contents/}}",
+      "allowedImageHosts": [
+        "cdn.mumuyuedu.com"
+      ],
+      "ruleSearch": {
+        "itemList": "$.data",
+        "itemName": "$.title",
+        "itemUrl": "'https://www.talkmanhua.com/detail/' + $.id + '.html'",
+        "itemCover": "$.cover",
+        "itemAuthor": "$.author",
+        "itemDescription": "$.intro"
+      },
+      "ruleBookInfo": {
+        "name": "#bookd",
+        "cover": ".detail-book-cover img@src",
+        "author": ".detail-book-author",
+        "description": ".detail-book-summary",
+        "genre": ".detail-book-keyword"
+      },
+      "ruleChapter": {
+        "chapterList": ".detail-chapters-list a.detail-chapters-list-item[href]",
+        "chapterName": ".detail-chapters-list-item-bookName",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "imageList": "img.chapter-img-new[data-original]@data-original"
+      }
+    },
+    {
+      "bookSourceName": "开心漫画",
+      "bookSourceKey": "aurora.zh.kaixinman",
+      "bookSourceUrl": "https://www.kaixinman.com",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "searchUrl": "https://www.kaixinman.com/search?q={{key}}",
+      "popularUrl": "https://www.kaixinman.com/",
+      "healthCheckQuery": "末日物流中心",
+      "allowedImageHosts": [
+        "s1.bzcdn.net",
+        "s2.bzcdn.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".comic-item",
+        "itemName": ".comic-info h4 a",
+        "itemUrl": ".comic-info h4 a@href",
+        "itemCover": ".comic-cover[data-original]@data-original"
+      },
+      "ruleBookInfo": {
+        "name": ".comic-detail h1.title > span:first-child",
+        "cover": ".comic-cover-box img@src",
+        "author": ".comic-detail p.data span:contains(作者)",
+        "description": ".comic-detail p.desc .left"
+      },
+      "ruleChapter": {
+        "chapterList": ".chapter-list li a[href^='/chapter/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "kaixinman-params-v1"
+      }
+    },
+    {
+      "bookSourceName": "天天看漫画",
+      "bookSourceKey": "aurora.zh.ttkmh",
+      "bookSourceUrl": "https://www.ttkmh.com",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "searchUrl": "https://www.ttkmh.com/search?key={{key}}",
+      "popularUrl": "https://www.ttkmh.com/",
+      "healthCheckQuery": "魔皇大管家",
+      "allowedImageHosts": [
+        "img1.baipiaoguai.org"
+      ],
+      "ruleSearch": {
+        "itemList": "li:has(a[href^='/manhua/'][title])",
+        "itemName": "a[href^='/manhua/'][title]@title",
+        "itemUrl": "a[href^='/manhua/'][title]@href",
+        "itemCover": "[data-original]@data-original"
+      },
+      "ruleBookInfo": {
+        "name": ".vod-info .info h3 a",
+        "cover": ".vod-info .pic img@data-original",
+        "author": ".vod-info .info span:contains(作者)",
+        "description": "meta[name=description]@content"
+      },
+      "ruleChapter": {
+        "chapterList": ".episode-box li a[href^='/chapter/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "ttkmh-params-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "36漫画（目录检索）",
+      "bookSourceKey": "aurora.zh.manhua36",
+      "bookSourceUrl": "https://m.36mh.org",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "searchUrl": "https://m.36mh.org/",
+      "catalogSearchUrls": [
+        "https://m.36mh.org/",
+        "https://m.36mh.org/custom/top",
+        "https://m.36mh.org/custom/update"
+      ],
+      "popularUrl": "https://m.36mh.org/custom/top",
+      "latestUrl": "https://m.36mh.org/custom/update",
+      "healthCheckQuery": "海贼王",
+      "allowedImageHosts": [
+        "dmw.546457.xyz",
+        "m.36mh.org"
+      ],
+      "ruleSearch": {
+        "itemList": "ul.rankList > li, ul.indexList > li, ul.m_list_1 > a[href^='/manhua/']",
+        "itemName": ".info .title, a > p",
+        "itemUrl": "a[href^='/manhua/']@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detailTop .info p.title",
+        "cover": ".detailTop img.cover@src",
+        "author": ".detailTop .info p.subtitle:contains(作者)",
+        "description": ".detailContent > p"
+      },
+      "ruleChapter": {
+        "chapterList": "ul.chapterList a[href^='/manhua/'][href$='.html']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "manhua36-params-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "漫蛙（雫）",
+      "bookSourceKey": "aurora.zh.manwashizuku",
+      "bookSourceUrl": "https://manwaxu.cc",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "catalogProfile": "manwa-catalog-v1",
+      "searchUrl": "https://manwads.cc/api/search?type=mh&page={{page}}&pageSize=20&keyword={{key}}",
+      "detailsUrl": "https://manwads.cc/comic/{{lastPathSegment}}",
+      "chaptersUrl": "https://manwads.cc/comic/{{lastPathSegment}}",
+      "contentUrl": "https://manwads.cc/api/comic/image/{{lastPathSegment}}?page=1&page_size=100",
+      "healthCheckQuery": "错撩",
+      "allowedImageHosts": [
+        "tu.mwzu.cc",
+        "mwtuwu.cc",
+        "tu.mhttu.cc",
+        "ce.mwzu.cc"
+      ],
+      "ruleSearch": {
+        "itemList": "$.data.list",
+        "itemName": "$.title",
+        "itemUrl": "$.url",
+        "itemCover": "$.cover",
+        "itemAuthor": "$.author",
+        "itemDescription": "$.description"
+      },
+      "ruleBookInfo": {
+        "name": "#page-title",
+        "cover": "img.comic-cover@data-src",
+        "author": "#author-container",
+        "description": "p.comic-desc",
+        "genre": "#tagsContainer",
+        "status": "#status"
+      },
+      "ruleChapter": {
+        "chapterList": "#chapter-grid-container > a[data-locked=false][href]",
+        "chapterName": "div.chapter-name",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "$.data.images",
+        "imageUrl": "$.url",
+        "imageResponse": "manwa-image-v1",
+        "imagePagination": {
+          "pageParameter": "page",
+          "currentPage": "$.data.pagination.current_page",
+          "totalPages": "$.data.pagination.total_pages",
+          "totalImages": "$.data.pagination.total"
+        }
+      }
+    },
+    {
+      "bookSourceName": "读漫屋",
+      "bookSourceKey": "aurora.zh.dumanwu",
+      "bookSourceUrl": "https://m.dumanwu.org",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "searchUrl": "https://m.dumanwu.org/index.php/search?key={{key}}",
+      "popularUrl": "https://m.dumanwu.org/custom/top",
+      "latestUrl": "https://m.dumanwu.org/custom/update",
+      "healthCheckQuery": "海贼王",
+      "allowedImageHosts": [
+        "dmw.546457.xyz",
+        "p6.ecombdimg.com",
+        "www.dumanwu.org"
+      ],
+      "upgradeMediaToHttps": true,
+      "ruleSearch": {
+        "itemList": "li:has(.info .title):has(a[href^='/comic/'])",
+        "itemName": ".info .title",
+        "itemUrl": "a[href^='/comic/']:not([href$='.html'])@href",
+        "itemCover": "a[href^='/comic/'] img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detailTop .content .title",
+        "cover": ".detailTop .content img.cover@src",
+        "author": ".detailTop .content .subtitle:contains(作者)",
+        "description": ".detailContent > p"
+      },
+      "ruleChapter": {
+        "chapterList": ".chapterList a[href$='.html']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "dumanwu-params-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "布卡漫画（仅首页目录检索）",
+      "bookSourceKey": "aurora.zh.bukamh",
+      "bookSourceUrl": "https://www.bukamh.com",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "searchUrl": "https://www.bukamh.com/",
+      "catalogSearchUrls": [
+        "https://www.bukamh.com/"
+      ],
+      "popularUrl": "https://www.bukamh.com/custom/hot",
+      "latestUrl": "https://www.bukamh.com/custom/update",
+      "healthCheckQuery": "我和老婆制霸三界",
+      "allowedImageHosts": [
+        "s2.bzcdn.net",
+        "static-tw.baozimh.com"
+      ],
+      "ruleSearch": {
+        "itemList": ".u_list li:has(a.name[href]), .comic_box li:has(a.txt[href])",
+        "itemName": "a.name, a.txt",
+        "itemUrl": "a.name, a.txt@href",
+        "itemCover": ".pic img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".infocomic .infobox > .title",
+        "cover": ".infocomic .infobox .img img@src",
+        "author": ".infocomic .infobox .info p.tage:contains(作者)",
+        "genre": ".infocomic .infobox .info p.tage:contains(类型)",
+        "description": ".infocomic > .text"
+      },
+      "ruleChapter": {
+        "chapterList": ".chapterbox .list a[href$='.html']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "bukamh-params-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "追漫画",
+      "bookSourceKey": "aurora.zh.ycymh",
+      "bookSourceUrl": "https://www.ycymh.com",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "searchUrl": "https://www.ycymh.com/search?key={{key}}",
+      "popularUrl": "https://www.ycymh.com/custom/top",
+      "latestUrl": "https://www.ycymh.com/custom/update",
+      "healthCheckQuery": "海贼王",
+      "allowedImageHosts": [
+        "img1.baipiaoguai.org"
+      ],
+      "ruleSearch": {
+        "itemList": "li.vbox:has(a.vbox_t[href^='/comic/'])",
+        "itemName": "a.vbox_t@title",
+        "itemUrl": "a.vbox_t@href",
+        "itemCover": "a.vbox_t mip-img, a.vbox_t img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".dbox .data h4",
+        "cover": ".dbox .img img@src",
+        "author": ".dbox .data .dir",
+        "genre": ".dbox .data .yac",
+        "description": "meta[name=description]@content"
+      },
+      "ruleChapter": {
+        "chapterList": "ul.list_block a[href^='/chapter/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "ycymh-params-v1"
+      }
+    },
+    {
+      "bookSourceName": "漫士多（仅首页目录检索）",
+      "bookSourceKey": "aurora.zh.manshiduo",
+      "bookSourceUrl": "https://manshiduo.org",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "searchUrl": "https://manshiduo.org/",
+      "catalogSearchUrls": [
+        "https://manshiduo.org/"
+      ],
+      "popularUrl": "https://manshiduo.org/custom/top",
+      "latestUrl": "https://manshiduo.org/custom/update",
+      "healthCheckQuery": "隐居十万年，后代请我出山",
+      "allowedImageHosts": [
+        "img1.baipiaoguai.org"
+      ],
+      "ruleSearch": {
+        "itemList": "li:has(.info .title):has(a[href^='/comic/']), ul.indexList > li:has(a[href^='/comic/'])",
+        "itemName": ".info .title, a > p",
+        "itemUrl": "a[href^='/comic/']@href",
+        "itemCover": "a[href^='/comic/'] > img:not([src*='/packs/mccms/empty.png'])@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detailTop .content .title",
+        "cover": ".detailTop .content img.cover:not([src*='/packs/mccms/empty.png'])@src",
+        "author": ".detailTop .content .subtitle:contains(作者)",
+        "genre": ".detailTop .content .subtitle:contains(类型)",
+        "description": ".detailContent > p"
+      },
+      "ruleChapter": {
+        "chapterList": ".chapterList a[href^='/chapter/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "manshiduo-params-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "喵趣漫画（仅首页目录检索）",
+      "bookSourceKey": "aurora.zh.miaoqu",
+      "bookSourceUrl": "https://www.miaoqumh.org",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "searchUrl": "https://www.miaoqumh.org/",
+      "catalogSearchUrls": [
+        "https://www.miaoqumh.org/"
+      ],
+      "popularUrl": "https://www.miaoqumh.org/category/order/hits/page/{{page}}",
+      "latestUrl": "https://www.miaoqumh.org/category/order/addtime/page/{{page}}",
+      "healthCheckQuery": "斗罗大陆5重生唐三",
+      "allowedImageHosts": [
+        "s2.bzcdn.net",
+        "static-tw.baozimh.com"
+      ],
+      "ruleSearch": {
+        "itemList": "#mangawrap > li:has(a.manga-name[href]), .manga-box li:has(a.manga-name[href])",
+        "itemName": "a.manga-name",
+        "itemUrl": "a.manga-name@href"
+      },
+      "ruleBookInfo": {
+        "name": ".manga-title h1",
+        "cover": ".manga-img img@src",
+        "author": ".manga-desc .manga-author a.author",
+        "description": ".manga-desc > p"
+      },
+      "ruleChapter": {
+        "chapterList": ".manga-episodes a.epsbox-eplink[href]",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "miaoqu-xor-v1"
+      }
+    },
+    {
+      "bookSourceName": "滴答漫画（仅首页目录检索）",
+      "bookSourceKey": "aurora.zh.didamanhua",
+      "bookSourceUrl": "http://ddmanhua.com",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "searchUrl": "http://ddmanhua.com/",
+      "catalogSearchUrls": [
+        "http://ddmanhua.com/"
+      ],
+      "popularUrl": "http://ddmanhua.com/",
+      "detailsUrl": "http://ddmanhua.com/book/{{pathAfter:/book/}}",
+      "chaptersUrl": "http://ddmanhua.com/book/{{pathAfter:/book/}}",
+      "contentUrl": "http://ddmanhua.com/chapter/{{pathAfter:/chapter/}}",
+      "healthCheckQuery": "格技3班",
+      "allowedImageHosts": [
+        "s2.bzcdn.net",
+        "static-tw.baozimh.com"
+      ],
+      "ruleSearch": {
+        "itemList": ".lists-content li:has(a.vodlist__thumb[href^='/book/'])",
+        "itemName": "a.vodlist__thumb@title",
+        "itemUrl": "a.vodlist__thumb@href",
+        "itemCover": "a.vodlist__thumb@data-original"
+      },
+      "ruleBookInfo": {
+        "name": ".product-header .product-title@ownText",
+        "cover": ".product-header img.thumb@src",
+        "author": ".product-header .product-excerpt:contains(作者) span",
+        "description": ".product-header .product-excerpt:contains(漫画简介) span"
+      },
+      "ruleChapter": {
+        "chapterList": "#myList a[href^='/chapter/']",
+        "chapterName": "text()",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "didamanhua-params-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "漫画吧",
+      "bookSourceKey": "aurora.zh.manhuaba",
+      "bookSourceUrl": "https://www.manhuaba.com",
+      "bookSourceType": 1,
+      "bookSourceLang": "zh-Hans",
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "searchUrl": "https://www.manhuaba.com/search?key={{key}}",
+      "popularUrl": "https://www.manhuaba.com/custom/top",
+      "latestUrl": "https://www.manhuaba.com/custom/update",
+      "healthCheckQuery": "我！天命大反派",
+      "allowedImageHosts": [
+        "s2.325784.xyz",
+        "www.manhuaba.com"
+      ],
+      "ruleSearch": {
+        "itemList": "a.module-poster-item[href^='/comic/']",
+        "itemName": "@title",
+        "itemUrl": "@href",
+        "itemCover": ".module-item-pic img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".module-info h1",
+        "cover": ".module-info-poster img@src",
+        "description": ".module-info-introduction-content"
+      },
+      "ruleChapter": {
+        "chapterList": "a.module-play-list-link[href^='/chapter/']",
+        "chapterName": "@title",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "manhuaba-params-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "GoDa漫画",
+      "bookSourceKey": "aurora.zh.goda",
+      "bookSourceUrl": "https://baozimh.org",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://baozimh.org/",
+      "searchUrl": "https://baozimh.org/s/{{key}}?page={{page}}",
+      "popularUrl": "https://baozimh.org/",
+      "chaptersUrl": "https://api-get-v3.mgsearcher.com/api/manga/get?mid={{detailId}}&mode=all",
+      "chapterIdSelector": "#mangachapters@data-mid",
+      "contentUrl": "https://api-get-v3.mgsearcher.com/api/v2/chapter/getinfo?m={{query:m}}&c={{query:c}}",
+      "allowedImageHosts": [
+        "c-nc-1.6wm.top",
+        "c-nd2-1.6wm.top"
+      ],
+      "healthCheckQuery": "我！天命大反派",
+      "ruleSearch": {
+        "itemList": "*:not(:has(> h2:contains(您可能喜歡))) > .cardlist .pb-2 a[href^='/manga/']",
+        "itemName": "h3.cardtitle@ownText()",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": "main h1@ownText()",
+        "cover": "meta[property='og:image']@content",
+        "description": "meta[name='description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": "$.data.chapters",
+        "chapterName": "$.attributes.title",
+        "chapterUrl": "$.id",
+        "chapterUrlTemplate": "https://baozimh.org/chapter?m={{mangaId}}&c={{chapterId}}",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "goda-images-v1"
+      }
+    },
+    {
+      "bookSourceName": "漫画客",
+      "bookSourceKey": "aurora.zh.yumanhua",
+      "bookSourceUrl": "http://www.yumanhua.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:http://www.yumanhua.com/",
+      "searchUrl": "http://www.yumanhua.com/s",
+      "searchForm": {
+        "field": "k",
+        "profile": "yumanhua-search-v1"
+      },
+      "popularUrl": "http://www.yumanhua.com/rank/1",
+      "latestUrl": "http://www.yumanhua.com/rank/5",
+      "chapterProfile": "yumanhua-more-v1",
+      "allowedImageHosts": [
+        "p3-zhuxiaobang-sign.shimolife.com",
+        "p6-zhuxiaobang-sign.shimolife.com",
+        "p9-zhuxiaobang-sign.shimolife.com",
+        "p6.ecombdimg.com"
+      ],
+      "healthCheckQuery": "斗罗大陆",
+      "ruleSearch": {
+        "itemList": ".item-data.s-data .col-auto a[href]",
+        "itemName": ".e-title@text",
+        "itemUrl": "@href",
+        "itemCover": "img@data-src"
+      },
+      "ruleBookInfo": {
+        "name": ".detinfo h1.name_mh@text",
+        "cover": ".mhcover img@data-src",
+        "description": ".detinfo p.content@text"
+      },
+      "ruleChapter": {
+        "chapterList": ".chapterlistload ul a[href]",
+        "chapterName": "@text",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "encryptedImages": "yumanhua-mmlook-v1"
+      }
+    },
+    {
+      "bookSourceName": "快看漫画（免费章节）",
+      "bookSourceKey": "aurora.zh.kuaikan.free",
+      "bookSourceUrl": "https://www.kuaikanmanhua.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "documentProfile": "kuaikan-nuxt-v1",
+      "httpUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "header": "Referer:https://www.kuaikanmanhua.com/",
+      "searchUrl": "https://api.kkmh.com/v1/search/topic?q={{key}}&since={{offset:10}}&size=10",
+      "popularUrl": "https://www.kuaikanmanhua.com/tag/0?region=1&pays=0&state=0&sort=2&page={{page}}",
+      "latestUrl": "https://www.kuaikanmanhua.com/tag/0?region=1&pays=0&state=0&sort=3&page={{page}}",
+      "detailsUrl": "https://www.kuaikanmanhua.com/web/topic/{{id}}/",
+      "chaptersUrl": "https://www.kuaikanmanhua.com/web/topic/{{id}}/",
+      "contentUrl": "https://www.kuaikanmanhua.com/webs/comic-next/{{id}}",
+      "allowedImageHosts": [
+        "tn1.kkmh.com",
+        "tn1-f2.kkmh.com",
+        "f2.kkmh.com",
+        "f1.kkmh.com",
+        "hs1-p1.v3mh.com"
+      ],
+      "healthCheckQuery": "绘心一笑",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "author": "$.details.author",
+        "description": "$.details.description",
+        "status": "$.details.status"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.id",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "MangaDex",
+      "bookSourceKey": "aurora.zh.mangadex",
+      "bookSourceUrl": "https://mangadex.org",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "documentProfile": "mangadex-api-v1",
+      "chapterProfile": "mangadex-feed-v1",
+      "httpUserAgent": "AuroraReader/0.1 (rule-conversion-validation)",
+      "header": "Referer:https://mangadex.org/",
+      "searchUrl": "https://api.mangadex.org/manga?title={{key}}&limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=zh",
+      "popularUrl": "https://api.mangadex.org/manga?limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=zh&order[followedCount]=desc",
+      "latestUrl": "https://api.mangadex.org/manga?limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=zh&order[latestUploadedChapter]=desc",
+      "detailsUrl": "https://api.mangadex.org/manga/{{id}}?includes[]=cover_art&includes[]=author",
+      "chaptersUrl": "https://api.mangadex.org/manga/{{id}}/feed?limit=500&offset=0&translatedLanguage[]=zh&order[volume]=desc&order[chapter]=desc&includeFuturePublishAt=0&includeEmptyPages=0&includeExternalUrl=0",
+      "contentUrl": "https://api.mangadex.org/at-home/server/{{id}}?forcePort443=true",
+      "allowedImageHosts": [
+        "uploads.mangadex.org"
+      ],
+      "healthCheckQuery": "Kimi wa Yotsuba no Clover",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "author": "$.details.author",
+        "description": "$.details.description",
+        "status": "$.details.status"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.id"
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "MangaDex",
+      "bookSourceKey": "aurora.zh-hant.mangadex",
+      "bookSourceUrl": "https://mangadex.org",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hant",
+      "documentProfile": "mangadex-api-v1",
+      "chapterProfile": "mangadex-feed-v1",
+      "httpUserAgent": "AuroraReader/0.1 (rule-conversion-validation)",
+      "header": "Referer:https://mangadex.org/",
+      "searchUrl": "https://api.mangadex.org/manga?title={{key}}&limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=zh-hk",
+      "popularUrl": "https://api.mangadex.org/manga?limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=zh-hk&order[followedCount]=desc",
+      "latestUrl": "https://api.mangadex.org/manga?limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=zh-hk&order[latestUploadedChapter]=desc",
+      "detailsUrl": "https://api.mangadex.org/manga/{{id}}?includes[]=cover_art&includes[]=author",
+      "chaptersUrl": "https://api.mangadex.org/manga/{{id}}/feed?limit=500&offset=0&translatedLanguage[]=zh-hk&order[volume]=desc&order[chapter]=desc&includeFuturePublishAt=0&includeEmptyPages=0&includeExternalUrl=0",
+      "contentUrl": "https://api.mangadex.org/at-home/server/{{id}}?forcePort443=true",
+      "allowedImageHosts": [
+        "uploads.mangadex.org"
+      ],
+      "healthCheckQuery": "Yotsuba to!",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "author": "$.details.author",
+        "description": "$.details.description",
+        "status": "$.details.status"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.id"
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "MangaDex",
+      "bookSourceKey": "aurora.en.mangadex",
+      "bookSourceUrl": "https://mangadex.org",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "en",
+      "documentProfile": "mangadex-api-v1",
+      "chapterProfile": "mangadex-feed-v1",
+      "httpUserAgent": "AuroraReader/0.1 (rule-conversion-validation)",
+      "header": "Referer:https://mangadex.org/",
+      "searchUrl": "https://api.mangadex.org/manga?title={{key}}&limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=en",
+      "popularUrl": "https://api.mangadex.org/manga?limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=en&order[followedCount]=desc",
+      "latestUrl": "https://api.mangadex.org/manga?limit=20&offset={{offset:20}}&includes[]=cover_art&availableTranslatedLanguage[]=en&order[latestUploadedChapter]=desc",
+      "detailsUrl": "https://api.mangadex.org/manga/{{id}}?includes[]=cover_art&includes[]=author",
+      "chaptersUrl": "https://api.mangadex.org/manga/{{id}}/feed?limit=500&offset=0&translatedLanguage[]=en&order[volume]=desc&order[chapter]=desc&includeFuturePublishAt=0&includeEmptyPages=0&includeExternalUrl=0",
+      "contentUrl": "https://api.mangadex.org/at-home/server/{{id}}?forcePort443=true",
+      "allowedImageHosts": [
+        "uploads.mangadex.org"
+      ],
+      "healthCheckQuery": "Yotsuba to!",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "author": "$.details.author",
+        "description": "$.details.description",
+        "status": "$.details.status"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.id"
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "腾讯漫画（公开免费章节）",
+      "bookSourceKey": "aurora.zh.tencentcomics.free",
+      "bookSourceUrl": "https://ac.qq.com",
+      "bookSourceLang": "zh",
+      "bookSourceType": 1,
+      "enable": true,
+      "documentProfile": "tencent-public-v1",
+      "httpUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/139 Safari/537.36",
+      "searchUrl": "https://ac.qq.com/Comic/searchList/search/{{key}}/page/{{page}}",
+      "popularUrl": "https://ac.qq.com/Comic/all/search/hot/page/{{page}}",
+      "latestUrl": "https://ac.qq.com/Comic/all/search/time/page/{{page}}",
+      "detailsUrl": "https://ac.qq.com/Comic/comicInfo/id/{{id}}",
+      "chaptersUrl": "https://ac.qq.com/Comic/comicInfo/id/{{id}}",
+      "contentUrl": "https://ac.qq.com/{{pathAfter:/}}",
+      "allowedImageHosts": [
+        "manhua.acimg.cn"
+      ],
+      "healthCheckQuery": "非人哉",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "description": "$.details.description",
+        "author": "$.details.author"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.url",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "嗶哩漫畫",
+      "bookSourceKey": "aurora.zh.bilimanga",
+      "bookSourceUrl": "https://www.bilimanga.net",
+      "bookSourceLang": "zh",
+      "bookSourceType": 1,
+      "enable": true,
+      "documentProfile": "bilimanga-public-v1",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36",
+      "searchUrl": "https://www.bilimanga.net/search/{{key}}_{{page}}.html",
+      "popularUrl": "https://www.bilimanga.net/top/weekvisit/{{page}}.html",
+      "latestUrl": "https://www.bilimanga.net/top/lastupdate/{{page}}.html",
+      "detailsUrl": "https://www.bilimanga.net/detail/{{id}}.html",
+      "chaptersUrl": "https://www.bilimanga.net/read/{{id}}/catalog",
+      "allowedImageHosts": [
+        "www.bilimanga.net"
+      ],
+      "healthCheckQuery": "海賊王",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "description": "$.details.description"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.url",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "古风漫画（仅首页目录检索）",
+      "bookSourceKey": "aurora.zh.gufengmh",
+      "bookSourceUrl": "https://www.gfmh.app",
+      "bookSourceLang": "zh",
+      "bookSourceType": 1,
+      "enable": true,
+      "searchUrl": "https://www.gfmh.app/",
+      "catalogSearchUrls": [
+        "https://www.gfmh.app/"
+      ],
+      "popularUrl": "https://www.gfmh.app/",
+      "latestUrl": "https://www.gfmh.app/category",
+      "allowedImageHosts": [
+        "www.gfmh.app",
+        "s2.325784.xyz",
+        "img1.baipiaoguai.org"
+      ],
+      "healthCheckQuery": "斩月",
+      "ruleSearch": {
+        "itemList": ".side_commend li, li.searchresult",
+        "itemName": "h2, h3",
+        "itemUrl": "a[href$=.html]@href",
+        "itemCover": "img@data-original"
+      },
+      "ruleBookInfo": {
+        "name": ".novel_info_main h1",
+        "cover": ".novel_info_main img@src",
+        "description": ".novel_info_content, .content"
+      },
+      "ruleChapter": {
+        "chapterList": "#ul_all_chapters a[href]",
+        "chapterName": "@text",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "gufeng-params-v1",
+        "imageResponse": "gufeng-image-v1"
+      },
+      "searchIntervalMs": 5000
+    },
+    {
+      "bookSourceName": "如漫画（原插件模板候选）",
+      "bookSourceKey": "aurora.zh.rumanhua",
+      "bookSourceUrl": "http://www.rumanhua2.com",
+      "bookSourceLang": "zh",
+      "bookSourceType": 1,
+      "enable": true,
+      "searchUrl": "http://www.rumanhua2.com/s",
+      "searchForm": {
+        "field": "k",
+        "profile": "rumanhua-search-v1"
+      },
+      "popularUrl": "http://www.rumanhua2.com/rank/1",
+      "latestUrl": "http://www.rumanhua2.com/rank/5",
+      "chapterProfile": "rumanhua-more-v1",
+      "contentUrl": "http://m.rumanhua2.com/{{pathAfter:/}}",
+      "allowedImageHosts": [
+        "www.rumanhua2.com",
+        "m.rumanhua2.com",
+        "p3-zhuxiaobang-sign.shimolife.com",
+        "p6-zhuxiaobang-sign.shimolife.com",
+        "p9-zhuxiaobang-sign.shimolife.com"
+      ],
+      "healthCheckQuery": "海贼王",
+      "ruleSearch": {
+        "itemList": ".item-data > div, .likedata",
+        "itemName": ".e-title, .title, .le-t",
+        "itemUrl": "a@href",
+        "itemCover": "img@data-src"
+      },
+      "ruleBookInfo": {
+        "name": ".comicInfo .detinfo h1",
+        "cover": ".comicInfo img@data-src",
+        "description": ".comicInfo .content"
+      },
+      "ruleChapter": {
+        "chapterList": ".chapterlistload ul a[href]",
+        "chapterName": "@text",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "encryptedImages": "rumanhua-mmlook-v1"
+      }
+    },
+    {
+      "bookSourceName": "香香腐宅（公开非VIP章节）",
+      "bookSourceKey": "aurora.zh.boylove.public",
+      "bookSourceUrl": "https://fulovehouse.net",
+      "bookSourceLang": "zh",
+      "bookSourceType": 1,
+      "enable": true,
+      "documentProfile": "boylove-public-v1",
+      "searchUrl": "https://fulovehouse.net/home/api/searchk?keyword={{key}}&type=1&pageNo={{page}}",
+      "popularUrl": "https://fulovehouse.net/home/api/getpage/tp/1-topestmh-{{offset:1}}",
+      "latestUrl": "https://fulovehouse.net/home/Api/getDailyUpdate.html?widx=4&page={{offset:1}}&limit=10",
+      "detailsUrl": "https://fulovehouse.net/home/book/index/id/{{id}}",
+      "chaptersUrl": "https://fulovehouse.net/home/api/chapter_list/tp/{{id}}",
+      "contentUrl": "https://fulovehouse.net/{{pathAfter:/}}?workId={{query:workId}}",
+      "allowedImageHosts": [
+        "img.boylove.cc",
+        "blcnimghost2.cc",
+        "img.fulovehouse.net"
+      ],
+      "healthCheckQuery": "Dear.00",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "description": "$.details.description"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.url",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "Rawkuma",
+      "bookSourceKey": "aurora.ja.rawkuma",
+      "bookSourceUrl": "https://rawkuma.net",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "ja",
+      "documentProfile": "rawkuma-public-v1",
+      "contentUrl": "https://rawkuma.net/{{pathAfter:/}}",
+      "catalogProfile": "rawkuma-search-v1",
+      "searchUrl": "https://rawkuma.net/wp-admin/admin-ajax.php?action=advanced_search",
+      "detailsUrl": "https://rawkuma.net/wp-json/wp/v2/manga/{{id}}?_embed",
+      "chaptersUrl": "https://rawkuma.net/wp-admin/admin-ajax.php?manga_id={{id}}&page=1&action=chapter_list",
+      "allowedImageHosts": [
+        "rawkuma.net",
+        "cdn.rawkuma.com"
+      ],
+      "healthCheckQuery": "Yotsuba",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "description": "$.details.description"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.url"
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "CCC追漫台（公开免费章节）",
+      "bookSourceKey": "aurora.zh-hant.creativecomic.free",
+      "bookSourceUrl": "https://www.creative-comic.tw",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hant",
+      "documentProfile": "ccc-public-v1",
+      "searchUrl": "https://api.creative-comic.tw/book?page={{page}}&rows_per_page=12&keyword={{key}}&category=all&sort_by=updated_at&class=2",
+      "popularUrl": "https://api.creative-comic.tw/book?page={{page}}&rows_per_page=24&sort_by=like_count&class=2",
+      "latestUrl": "https://api.creative-comic.tw/book?page={{page}}&rows_per_page=24&sort_by=updated_at&class=2",
+      "detailsUrl": "https://api.creative-comic.tw/book/{{id}}/info",
+      "chaptersUrl": "https://api.creative-comic.tw/book/{{id}}/chapter",
+      "contentUrl": "https://api.creative-comic.tw/book/chapter/{{id}}",
+      "allowedImageHosts": [
+        "www.creative-comic.tw",
+        "storage.googleapis.com"
+      ],
+      "healthCheckQuery": "Day Off",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "description": "$.details.description"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.id",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "再漫画（公开可读内容）",
+      "bookSourceKey": "aurora.zh.zaimanhua",
+      "bookSourceUrl": "https://manhua.zaimanhua.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh",
+      "documentProfile": "zaimanhua-public-v1",
+      "searchUrl": "https://v4api.zaimanhua.com/app/v1/search/index?source=0&size=10&page={{page}}&keyword={{key}}",
+      "popularUrl": "https://v4api.zaimanhua.com/app/v1/comic/rank/list?tag_id=0&page={{page}}",
+      "latestUrl": "https://v4api.zaimanhua.com/app/v1/comic/update/list/0/{{page}}",
+      "detailsUrl": "https://v4api.zaimanhua.com/app/v1/comic/detail/{{id}}?_v=2.2.5",
+      "chaptersUrl": "https://v4api.zaimanhua.com/app/v1/comic/detail/{{id}}?_v=2.2.5",
+      "contentUrl": "https://v4api.zaimanhua.com/{{pathAfter:/}}?_v=2.2.5",
+      "allowedImageHosts": [
+        "images.zaimanhua.com"
+      ],
+      "healthCheckQuery": "我们的葬礼",
+      "ruleSearch": {
+        "itemList": "$.items",
+        "itemName": "$.title",
+        "itemUrl": "$.id",
+        "itemCover": "$.cover",
+        "hasNextPage": "$.hasNext"
+      },
+      "ruleBookInfo": {
+        "name": "$.details.title",
+        "cover": "$.details.cover",
+        "description": "$.details.description"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapters",
+        "chapterName": "$.title",
+        "chapterUrl": "$.url"
+      },
+      "ruleContent": {
+        "imageList": "$.images"
+      }
+    },
+    {
+      "bookSourceName": "LINE WEBTOON（英文）",
+      "bookSourceKey": "aurora.en.webtoons",
+      "bookSourceUrl": "https://www.webtoons.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "en",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.webtoons.com/",
+      "searchUrl": "https://www.webtoons.com/en/search?keyword={{key}}",
+      "popularUrl": "https://www.webtoons.com/en/ranking/trending",
+      "chaptersUrl": "https://m.webtoons.com/api/v1/webtoon/{{query:title_no}}/episodes?pageSize=99999",
+      "allowedImageHosts": [
+        "webtoon-phinf.pstatic.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".webtoon_list li a[href*='/list?title_no=']",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author_area",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "$.result.episodeList",
+        "chapterName": "$.episodeTitle",
+        "chapterUrl": "$.viewerLink"
+      },
+      "ruleContent": {
+        "imageList": "#_imageList > img[data-url]@data-url"
+      }
+    },
+    {
+      "bookSourceName": "LINE WEBTOON（印尼文）",
+      "bookSourceKey": "aurora.id.webtoons",
+      "bookSourceUrl": "https://www.webtoons.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "id",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.webtoons.com/",
+      "searchUrl": "https://www.webtoons.com/id/search?keyword={{key}}",
+      "popularUrl": "https://www.webtoons.com/id/ranking/trending",
+      "chaptersUrl": "https://m.webtoons.com/api/v1/webtoon/{{query:title_no}}/episodes?pageSize=99999",
+      "allowedImageHosts": [
+        "webtoon-phinf.pstatic.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".webtoon_list li a[href*='/list?title_no=']",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author_area",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "$.result.episodeList",
+        "chapterName": "$.episodeTitle",
+        "chapterUrl": "$.viewerLink"
+      },
+      "ruleContent": {
+        "imageList": "#_imageList > img[data-url]@data-url"
+      }
+    },
+    {
+      "bookSourceName": "LINE WEBTOON（泰文）",
+      "bookSourceKey": "aurora.th.webtoons",
+      "bookSourceUrl": "https://www.webtoons.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "th",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.webtoons.com/",
+      "searchUrl": "https://www.webtoons.com/th/search?keyword={{key}}",
+      "popularUrl": "https://www.webtoons.com/th/ranking/trending",
+      "chaptersUrl": "https://m.webtoons.com/api/v1/webtoon/{{query:title_no}}/episodes?pageSize=99999",
+      "allowedImageHosts": [
+        "webtoon-phinf.pstatic.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".webtoon_list li a[href*='/list?title_no=']",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author_area",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "$.result.episodeList",
+        "chapterName": "$.episodeTitle",
+        "chapterUrl": "$.viewerLink"
+      },
+      "ruleContent": {
+        "imageList": "#_imageList > img[data-url]@data-url"
+      }
+    },
+    {
+      "bookSourceName": "LINE WEBTOON（西班牙文）",
+      "bookSourceKey": "aurora.es.webtoons",
+      "bookSourceUrl": "https://www.webtoons.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "es",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.webtoons.com/",
+      "searchUrl": "https://www.webtoons.com/es/search?keyword={{key}}",
+      "popularUrl": "https://www.webtoons.com/es/ranking/trending",
+      "chaptersUrl": "https://m.webtoons.com/api/v1/webtoon/{{query:title_no}}/episodes?pageSize=99999",
+      "allowedImageHosts": [
+        "webtoon-phinf.pstatic.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".webtoon_list li a[href*='/list?title_no=']",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author_area",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "$.result.episodeList",
+        "chapterName": "$.episodeTitle",
+        "chapterUrl": "$.viewerLink"
+      },
+      "ruleContent": {
+        "imageList": "#_imageList > img[data-url]@data-url"
+      }
+    },
+    {
+      "bookSourceName": "LINE WEBTOON（法文）",
+      "bookSourceKey": "aurora.fr.webtoons",
+      "bookSourceUrl": "https://www.webtoons.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "fr",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.webtoons.com/",
+      "searchUrl": "https://www.webtoons.com/fr/search?keyword={{key}}",
+      "popularUrl": "https://www.webtoons.com/fr/ranking/trending",
+      "chaptersUrl": "https://m.webtoons.com/api/v1/webtoon/{{query:title_no}}/episodes?pageSize=99999",
+      "allowedImageHosts": [
+        "webtoon-phinf.pstatic.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".webtoon_list li a[href*='/list?title_no=']",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author_area",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "$.result.episodeList",
+        "chapterName": "$.episodeTitle",
+        "chapterUrl": "$.viewerLink"
+      },
+      "ruleContent": {
+        "imageList": "#_imageList > img[data-url]@data-url"
+      }
+    },
+    {
+      "bookSourceName": "LINE WEBTOON（德文）",
+      "bookSourceKey": "aurora.de.webtoons",
+      "bookSourceUrl": "https://www.webtoons.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "de",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/139 Mobile Safari/537.36",
+      "header": "Referer:https://www.webtoons.com/",
+      "searchUrl": "https://www.webtoons.com/de/search?keyword={{key}}",
+      "popularUrl": "https://www.webtoons.com/de/ranking/trending",
+      "chaptersUrl": "https://m.webtoons.com/api/v1/webtoon/{{query:title_no}}/episodes?pageSize=99999",
+      "allowedImageHosts": [
+        "webtoon-phinf.pstatic.net"
+      ],
+      "ruleSearch": {
+        "itemList": ".webtoon_list li a[href*='/list?title_no=']",
+        "itemName": ".title",
+        "itemUrl": "@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": ".detail_header h1.subj",
+        "cover": ".detail_header .thmb img@src",
+        "author": ".detail_header .info .author_area",
+        "genre": ".detail_header .info .genre",
+        "description": "#_asideDetail p.summary"
+      },
+      "ruleChapter": {
+        "chapterList": "$.result.episodeList",
+        "chapterName": "$.episodeTitle",
+        "chapterUrl": "$.viewerLink"
+      },
+      "ruleContent": {
+        "imageList": "#_imageList > img[data-url]@data-url"
+      }
+    },
+    {
+      "bookSourceName": "Sen Manga（仅热门目录检索）",
+      "contentUrl": "https://raw.senmanga.com/{{pathAfter:/}}",
+      "bookSourceKey": "aurora.ja.senmanga",
+      "bookSourceUrl": "https://raw.senmanga.com",
+      "bookSourceLang": "ja",
+      "searchUrl": "https://raw.senmanga.com/api/directory?order=Popular&page=1",
+      "catalogSearchUrls": [
+        "https://raw.senmanga.com/api/directory?order=Popular&page=1"
+      ],
+      "popularUrl": "https://raw.senmanga.com/api/directory?order=Popular&page={{page}}",
+      "latestUrl": "https://raw.senmanga.com/api/home?page={{page}}",
+      "detailsUrl": "https://raw.senmanga.com/api/manga/{{id}}",
+      "chaptersUrl": "https://raw.senmanga.com/api/manga/{{id}}",
+      "allowedImageHosts": [
+        "rawkuma.net",
+        "cdn.rawkuma.com"
+      ],
+      "healthCheckQuery": "Chainsaw Man",
+      "ruleSearch": {
+        "itemList": "$.series",
+        "itemName": "$.title",
+        "itemUrl": "$.slug",
+        "itemCover": "$.cover"
+      },
+      "ruleBookInfo": {
+        "name": "$.title",
+        "cover": "$.cover",
+        "genre": "$.genre",
+        "status": "$.status",
+        "description": "$.description"
+      },
+      "ruleChapter": {
+        "chapterList": "$.chapterList",
+        "chapterName": "$.title",
+        "chapterUrl": "$.url",
+        "chapterUrlTemplate": "https://raw.senmanga.com/api/read/{{mangaId}}/{{chapterId}}"
+      },
+      "ruleContent": {
+        "imageList": "$.pages"
+      },
+      "bookSourceType": 1,
+      "enable": true
+    },
+    {
+      "bookSourceName": "漫圈子（现漫集市）",
+      "bookSourceKey": "aurora.zh.manquanzi",
+      "bookSourceUrl": "http://www.9mqz.com",
+      "bookSourceLang": "zh-Hans",
+      "searchUrl": "https://www.9mqz.com/search/{{key}}",
+      "popularUrl": "https://www.9mqz.com/custom/top",
+      "latestUrl": "https://www.9mqz.com/custom/update",
+      "allowedImageHosts": [
+        "www.9mqz.com",
+        "img.9mqz.com",
+        "img.fanmugua.net"
+      ],
+      "healthCheckQuery": "霸总的秘密教学",
+      "ruleSearch": {
+        "itemList": "li.acgn-item:has(a.acgn-thumbnail[href^=/comic/]), li:has(a.pic[href^='/comic/'])",
+        "itemName": "img@alt",
+        "itemUrl": "a.acgn-thumbnail, a.pic@href",
+        "itemCover": "img@src",
+        "filterTitle": true
+      },
+      "ruleBookInfo": {
+        "name": "meta[property=og:novel:book_name]@content",
+        "cover": "meta[property=og:image]@content",
+        "author": "meta[property=og:novel:author]@content",
+        "description": "meta[property=og:description]@content"
+      },
+      "ruleChapter": {
+        "chapterList": "#j_chapter_list a[href^=/chapter/]",
+        "chapterName": "@title",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": ".rd-article__pic img.lazy-read[data-original]@data-original"
+      },
+      "bookSourceType": 1,
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/139.0 Safari/537.36"
+    },
+    {
+      "bookSourceName": "MyComic",
+      "bookSourceKey": "aurora.zh.mycomic",
+      "bookSourceUrl": "https://mycomic.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh",
+      "searchUrl": "https://mycomic.com/comics?q={{key}}&page={{page}}",
+      "popularUrl": "https://mycomic.com/comics?sort=-views&page={{page}}",
+      "latestUrl": "https://mycomic.com/comics?sort=-update&page={{page}}",
+      "chapterProfile": "mycomic-xdata-v1",
+      "allowedImageHosts": [
+        "mycomic.com",
+        "biccam.com"
+      ],
+      "healthCheckQuery": "海賊王",
+      "ruleSearch": {
+        "itemList": "div.grid > div.group",
+        "itemName": "img@alt",
+        "itemUrl": "a@href",
+        "itemCover": "img@data-src"
+      },
+      "ruleBookInfo": {
+        "name": "div[data-flux-card] div[data-flux-heading]",
+        "cover": "div[data-flux-card] img.object-cover@data-src",
+        "description": "meta[name=description]@content"
+      },
+      "ruleChapter": {
+        "chapterList": "div[data-flux-card] + div div[x-data]",
+        "chapterName": "@title",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "imageList": "img[x-ref]@data-src"
+      }
+    },
+    {
+      "bookSourceName": "搜漫（Veryim 路径）",
+      "bookSourceKey": "aurora.zh.soman.veryim",
+      "bookSourceUrl": "http://www.veryim.com",
+      "bookSourceLang": "zh-Hans",
+      "searchUrl": "http://www.veryim.com/statics/search.aspx?key={{key}}",
+      "popularUrl": "http://www.veryim.com/",
+      "latestUrl": "http://www.veryim.com/update/",
+      "allowedImageHosts": [
+        "www.veryim.com",
+        "i.hamreus.com"
+      ],
+      "healthCheckQuery": "海贼王",
+      "ruleSearch": {
+        "itemList": ".media:has(a[href^=/manhua/][title])",
+        "itemName": "a[href^=/manhua/][title]@title",
+        "itemUrl": "a[href^=/manhua/][title]@href",
+        "itemCover": "img@src"
+      },
+      "ruleBookInfo": {
+        "name": "meta[property=og:title]@content",
+        "cover": "meta[property=og:image]@content",
+        "description": "meta[property=og:description]@content",
+        "author": "meta[property=og:novel:author]@content"
+      },
+      "ruleChapter": {
+        "chapterList": ".rowzhangjie .list-charts a[href^=/manhua/][href$=.html]",
+        "chapterName": "text()",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "encryptedImages": "veryim-images-v1"
+      },
+      "enable": true,
+      "bookSourceType": 1
+    },
+    {
+      "bookSourceName": "漫画大全（仅首页目录检索）",
+      "bookSourceKey": "aurora.zh.manhuadaquan",
+      "bookSourceUrl": "http://www.yueman1.cc",
+      "bookSourceLang": "zh-Hans",
+      "searchUrl": "http://www.yueman1.cc/",
+      "catalogSearchUrls": [
+        "http://www.yueman1.cc/"
+      ],
+      "popularUrl": "http://www.yueman1.cc/",
+      "latestUrl": "http://www.yueman1.cc/",
+      "allowedImageHosts": [
+        "www.yueman1.cc",
+        "p8.taoman.cc"
+      ],
+      "healthCheckQuery": "妖神记",
+      "ruleSearch": {
+        "itemList": "a[href^=/manhua/][title]",
+        "itemName": "@title",
+        "itemUrl": "@href",
+        "itemCover": "@i"
+      },
+      "ruleBookInfo": {
+        "name": "#intro_l h1",
+        "cover": "#intro_l .info_cover img@src",
+        "description": "#intro1 p"
+      },
+      "ruleChapter": {
+        "chapterList": "#play_0 li > a[href^=/p/]",
+        "chapterName": "text()",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "base64ImageList": {
+          "variable": "qTcms_S_m_murl_e",
+          "separator": "$qingtiandy$"
+        }
+      },
+      "enable": true,
+      "bookSourceType": 1
+    },
+    {
+      "bookSourceName": "YYDS漫画",
+      "bookSourceUrl": "https://www.yydsmh.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://www.yydsmh.com/",
+      "healthCheckQuery": "海贼王",
+      "searchUrl": "https://www.yydsmh.com/api/front/index/search?key={{key}}",
+      "detailsUrl": "https://www.yydsmh.com/{{pathAfter:/}}",
+      "chaptersUrl": "https://www.yydsmh.com/{{pathAfter:/}}",
+      "contentUrl": "https://www.yydsmh.com/{{pathAfter:/}}",
+      "allowedImageHosts": [
+        "tuer.justpic01pt.com"
+      ],
+      "ruleSearch": {
+        "itemList": "$.data[*]",
+        "itemName": "$.name",
+        "itemUrl": "$.info_url",
+        "itemCover": "$.cover",
+        "itemAuthor": "$.author",
+        "itemDescription": "$.intro_des"
+      },
+      "ruleBookInfo": {
+        "name": "meta[property='og:novel:book_name']@content",
+        "cover": "meta[property='og:image']@content",
+        "author": "meta[property='og:novel:author']@content",
+        "genre": "meta[property='og:novel:category']@content",
+        "status": "meta[property='og:novel:status']@content",
+        "description": "meta[name='description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": "#js_chapters li.comic-chapter-item a.comic-chapter-link[href]",
+        "chapterName": "@title",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "imageList": "#imgsec .reader-pic-slot",
+        "htmlPageProfile": "yyds-batch-v1"
+      },
+      "bookSourceKey": "c83a5def9152db9d4e003f79"
+    },
+    {
+      "bookSourceName": "艾米免费漫画",
+      "bookSourceUrl": "http://www.aymry.com",
+      "bookSourceType": 1,
+      "enable": true,
+      "bookSourceLang": "zh-Hans",
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:http://www.aymry.com/",
+      "searchUrl": "http://www.aymry.com/api/front/index/search?key={{key}}",
+      "detailsUrl": "http://www.aymry.com/{{pathAfter:/}}",
+      "chaptersUrl": "http://www.aymry.com/{{pathAfter:/}}",
+      "contentUrl": "http://www.aymry.com/{{pathAfter:/}}",
+      "allowedImageHosts": [
+        "cfimgt1.bmwz1.com"
+      ],
+      "ruleSearch": {
+        "itemList": "$.data[*]",
+        "itemName": "$.name",
+        "itemUrl": "$.info_url",
+        "itemCover": "$.cover",
+        "itemAuthor": "$.author",
+        "itemDescription": "$.intro_des",
+        "filterTitle": true
+      },
+      "ruleBookInfo": {
+        "name": "meta[property='og:novel:book_name']@content",
+        "cover": "meta[property='og:image']@content",
+        "author": "meta[property='og:novel:author']@content",
+        "genre": "meta[property='og:novel:category']@content",
+        "status": "meta[property='og:novel:status']@content",
+        "description": "meta[name='description']@content"
+      },
+      "ruleChapter": {
+        "chapterList": "#j_chapter_list li.item a[href], #js_chapter_list a.comic-chapter-link[href]",
+        "chapterName": "@title",
+        "chapterUrl": "@href"
+      },
+      "ruleContent": {
+        "imageList": "#img-box img, .acgn-reader-chapter__item[chapter-pid] > img@src"
+      },
+      "healthCheckQuery": "重生指引",
+      "bookSourceKey": "485ad9a9d9e637e509f74929"
+    },
+    {
+      "bookSourceName": "搜漫·极速漫画（连载目录）",
+      "bookSourceKey": "aurora.zh.soman.jisu",
+      "bookSourceUrl": "https://m.1kkk.com",
+      "bookSourceLang": "zh-Hans",
+      "bookSourceType": 1,
+      "enable": true,
+      "httpUserAgent": "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/126.0 Mobile Safari/537.36",
+      "header": "Referer:https://m.1kkk.com/",
+      "healthCheckQuery": "妖神记",
+      "searchUrl": "https://m.1kkk.com/search?title={{key}}&language=1",
+      "allowedImageHosts": [
+        "manhua1033-61-174-50-99.cdndm5.com",
+        "mhfm1tel.cdndm5.com",
+        "mhfm2tel.cdndm5.com",
+        "mhfm3tel.cdndm5.com",
+        "mhfm4tel.cdndm5.com",
+        "mhfm5tel.cdndm5.com",
+        "mhfm6tel.cdndm5.com",
+        "mhfm7tel.cdndm5.com",
+        "mhfm8tel.cdndm5.com",
+        "mhfm9tel.cdndm5.com"
+      ],
+      "ruleSearch": {
+        "itemList": "ul.book-list > li",
+        "itemName": ".book-list-info-title",
+        "itemUrl": ".book-list-cover a@href",
+        "itemCover": ".book-list-cover img@src",
+        "itemDescription": ".book-list-info-desc",
+        "filterTitle": true
+      },
+      "ruleBookInfo": {
+        "name": ".detail-main-info-title",
+        "cover": ".detail-main-cover img@src",
+        "author": ".detail-main-info-author",
+        "description": ".detail-desc"
+      },
+      "ruleChapter": {
+        "chapterList": "#detail-list-select-1 a.chapteritem[href]",
+        "chapterName": ".detail-list-2-info-title",
+        "chapterUrl": "@href",
+        "reverse": true
+      },
+      "ruleContent": {
+        "encryptedImages": "jisu-packed-images-v1"
+      }
     }
   ]
 }
