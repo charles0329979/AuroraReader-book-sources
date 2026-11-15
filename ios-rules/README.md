@@ -3,7 +3,9 @@
 固定用户地址：
 https://raw.githubusercontent.com/charles0329979/AuroraReader-book-sources/main/ios-rules/catalog.json
 
-2026-11-14：revision 4 收录 Android 规则测试目录中的全部 56 条规则，保留来源 ID；这是迁移清单，不等于 56 条均已健康验收。适用于 `ios/reading-loop-cloud` 的第 2 代规则引擎。旧的三书源 iOS 原型需先更新一次应用；Android 正式版及其发布通道没有修改。
+2026-11-15：当前 revision 6，收录 Android 规则测试目录中的全部 56 条规则，保留来源 ID；这是迁移清单，不等于 56 条均已健康验收。适用于 `ios/reading-loop-cloud` 的第 2 代规则引擎。旧的三书源 iOS 原型需先更新一次应用；Android 正式版及其发布通道没有修改。
+
+当前引擎支持 53 条，累计 30 条完成整章下载、本地重载和进度恢复的云端模拟器样本验收；20 条现场链路未走通、3 条缺少样本、3 条安全传输及适配受阻。不是 56 条全部可用或 iPhone 真机验收。第 5 版修复香香腐宅章节顺序，第 6 版新增 ant/看漫画已审核的精确图片域名；签名第 4 版到第 5/6 版在线更新均已实测。新增域名仍要求应用先具备对应审核策略。
 
 ## 客户端处理
 
