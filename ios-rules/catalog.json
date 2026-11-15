@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": 5,
+  "revision": 6,
   "minimumEngineVersion": 2,
   "requiredCapabilities": [
     "catalog.inventory.v1",
@@ -449,7 +449,8 @@
       "healthCheckQuery": "世界计划四格漫画",
       "popularUrl": "https://www.antbyw.com/plugin.php?id=jameson_manhua&c=index&a=ku",
       "allowedImageHosts": [
-        "imgmh3.antbyw.com"
+        "imgmh3.antbyw.com",
+        "imgmhc.antbyw.com"
       ],
       "ruleSearch": {
         "itemList": "div.uk-card:has(.uk-card-media-top a[href*='a=bofang'])",
@@ -568,7 +569,8 @@
       "contentUrl": "https://m.kanman.com/api/getchapterinfov2?product_id=1&productname=kmh&platformname=wap&comic_id={{query:comic_id}}&chapter_newid={{query:chapter_newid}}&isWebp=1&quality=low",
       "allowedImageHosts": [
         "hw-chapter2.kaimanhua.com",
-        "image.yqmh.com"
+        "image.yqmh.com",
+        "hw-chapter3.kaimanhua.com"
       ],
       "ruleSearch": {
         "itemList": "$.data",
