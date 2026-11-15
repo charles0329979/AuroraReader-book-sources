@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": 4,
+  "revision": 5,
   "minimumEngineVersion": 2,
   "requiredCapabilities": [
     "catalog.inventory.v1",
@@ -1657,7 +1657,7 @@
         "chapterList": "$.chapters",
         "chapterName": "$.title",
         "chapterUrl": "$.url",
-        "reverse": true
+        "reverse": false
       },
       "ruleContent": {
         "imageList": "$.images"
