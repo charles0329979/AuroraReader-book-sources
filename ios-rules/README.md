@@ -3,7 +3,7 @@
 固定用户地址：
 https://raw.githubusercontent.com/charles0329979/AuroraReader-book-sources/main/ios-rules/catalog.json
 
-2026-11-25：当前 revision 7，收录 Android 规则测试目录中的全部 56 条规则，保留来源 ID；这是迁移清单，不等于 56 条均已健康验收。适用于 `ios/reading-loop-cloud` 的第 2 代规则引擎。旧的三书源 iOS 原型需先更新一次应用；Android 正式版及其发布通道没有修改。
+2026-11-25：当前 revision 8，收录 Android 规则测试目录中的全部 56 条规则，保留来源 ID；这是迁移清单，不等于 56 条均已健康验收。适用于 `ios/reading-loop-cloud` 的第 2 代规则引擎。旧的三书源 iOS 原型需先更新一次应用；Android 正式版及其发布通道没有修改。
 
 当前引擎支持 53 条，累计 30 条完成整章下载、本地重载和进度恢复的云端模拟器样本验收；20 条现场链路未走通、3 条缺少样本、3 条安全传输及适配受阻。不是 56 条全部可用或 iPhone 真机验收。第 5 版修复香香腐宅章节顺序，第 6 版新增 ant/看漫画已审核的精确图片域名；签名第 4 版到第 5/6 版在线更新均已实测。新增域名仍要求应用先具备对应审核策略。
 
@@ -39,3 +39,5 @@ https://raw.githubusercontent.com/charles0329979/AuroraReader-book-sources/main/
 - 联想规则测试版对两条更新后的规则完成搜索（含无结果对照）、详情、目录、章节图片、下载及本地重载检查，均为 ONLINE_READY。不是 iPhone 或 iOS 模拟器验收，不能将本轮结果并入此前 30 条 iOS 阅读链路数量。
 - 如漫画当前三个 rumanhua2.com HTTPS 主机均存在证书名称不匹配；规则保留原有规则测试版 HTTP 通道，没有关闭证书校验。iOS 当前不能靠订阅刷新解决该 HTTPS／适配限制。
 - 目录在本地使用原发布密钥签名并验证；本次提交跳过云端 CI，不启动 macOS 构建，也不更改应用安装包。
+
+签名字节说明：第 7 版发布时修正了 Windows／Git 换行规范化差异，第 8 版以固定 LF 字节重新发布，保证已接收任一第 7 版快照的客户端可按更高版本正常更新，不要求降低签名校验。
