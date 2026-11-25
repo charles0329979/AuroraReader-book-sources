@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02",
+  "updatedAt": "2026-11-25",
   "publicationState": "independent-rule-test-all-conversions-not-official-release",
   "sources": [
     {
@@ -854,7 +854,7 @@
       "detailsUrl": "https://manwads.cc/comic/{{lastPathSegment}}",
       "chaptersUrl": "https://manwads.cc/comic/{{lastPathSegment}}",
       "contentUrl": "https://manwads.cc/api/comic/image/{{lastPathSegment}}?page=1&page_size=100",
-      "healthCheckQuery": "错撩",
+      "healthCheckQuery": "校园人鱼",
       "allowedImageHosts": [
         "tu.mwzu.cc",
         "mwtuwu.cc",
@@ -893,6 +893,13 @@
           "totalPages": "$.data.pagination.total_pages",
           "totalImages": "$.data.pagination.total"
         }
+      },
+      "exploreUrl": "https://manwads.cc/",
+      "ruleExplore": {
+        "itemList": ".bm-box .item",
+        "itemName": ".title@text",
+        "itemUrl": "a@href",
+        "itemCover": ".thumb_img@data-src"
       }
     },
     {
@@ -1571,7 +1578,7 @@
       "searchIntervalMs": 5000
     },
     {
-      "bookSourceName": "如漫画（原插件模板候选）",
+      "bookSourceName": "如漫画",
       "bookSourceKey": "aurora.zh.rumanhua",
       "bookSourceUrl": "http://www.rumanhua2.com",
       "bookSourceLang": "zh",
@@ -1591,9 +1598,10 @@
         "m.rumanhua2.com",
         "p3-zhuxiaobang-sign.shimolife.com",
         "p6-zhuxiaobang-sign.shimolife.com",
-        "p9-zhuxiaobang-sign.shimolife.com"
+        "p9-zhuxiaobang-sign.shimolife.com",
+        "p6.ecombdimg.com"
       ],
-      "healthCheckQuery": "海贼王",
+      "healthCheckQuery": "一人之下",
       "ruleSearch": {
         "itemList": ".item-data > div, .likedata",
         "itemName": ".e-title, .title, .le-t",
@@ -1601,9 +1609,10 @@
         "itemCover": "img@data-src"
       },
       "ruleBookInfo": {
-        "name": ".comicInfo .detinfo h1",
+        "name": ".comicInfo .detinfo h1, h1.name_mh",
         "cover": ".comicInfo img@data-src",
-        "description": ".comicInfo .content"
+        "description": ".comicInfo .content",
+        "author": ".comicInfo .detinfo > p span"
       },
       "ruleChapter": {
         "chapterList": ".chapterlistload ul a[href]",
@@ -2326,5 +2335,5 @@
       }
     }
   ],
-  "revision": 2
+  "revision": 3
 }
