@@ -3,7 +3,11 @@ import crypto from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const dir = path.dirname(fileURLToPath(import.meta.url));
-const payload = fs.readFileSync(path.join(dir, 'catalog.json'));
+const verifyOnly = process.argv.includes('--verify');
+const payloadFile = path.join(dir, 'catalog.json');
+const originalPayload = fs.readFileSync(payloadFile);
+const payload = verifyOnly ? originalPayload : Buffer.from(originalPayload.toString('utf8').replace(/\r\n/g, '\n'), 'utf8');
+if (!verifyOnly && !payload.equals(originalPayload)) fs.writeFileSync(payloadFile, payload);
 const catalog = JSON.parse(payload);
 if (catalog.schemaVersion !== 1 || !Number.isInteger(catalog.revision) || catalog.revision < 1 ||
     !Array.isArray(catalog.sources) || catalog.sources.length > 128 || !catalog.sources.length) throw Error('Invalid catalog');
@@ -13,7 +17,6 @@ const keys = JSON.parse(fs.readFileSync(path.join(dir, 'public-keys.json')));
 const keyId = process.env.IOS_RULE_SIGNING_KEY_ID || 'aurora-ios-20261114-1';
 const context = Buffer.from('AuroraReader.rules.v1\0');
 const message = Buffer.concat([context, payload]);
-const verifyOnly = process.argv.includes('--verify');
 if (verifyOnly) {
   const envelope = JSON.parse(fs.readFileSync(path.join(dir, 'catalog.signed.json')));
   const pub = crypto.createPublicKey({key: Buffer.concat([Buffer.from('302a300506032b6570032100', 'hex'), Buffer.from(keys[envelope.keyId], 'base64')]), format: 'der', type: 'spki'});
